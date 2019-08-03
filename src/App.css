@@ -1,3 +1,6 @@
+@import '~antd/dist/antd.css';
+
+
 .App {
   text-align: center;
 }
@@ -9,13 +12,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #f7f7f8;
+/*  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  */additive-symbols: calc(10px + 2vmin);
   color: white;
 }
 
@@ -30,4 +33,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Task-card {
+  margin-bottom: 16px;
+  margin-right: 16px;
+}
+
+.App-task-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.App-title {
+  text-align: left;
+  margin-left: 3px;
+  font-size: 20px;
 }
