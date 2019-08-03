@@ -49,27 +49,62 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 // when changing columns
-const changeColumn = (source, destination, state) => {
+const moveToDifferentColumn = (source, destination, state) => {
 
-  const sourceData = Array.from(state[source.droppableId]);
 
-  const destinationData = Array.from(state[destination.droppableId]);
+  let columns = state.columns;
+
+
+  const sourceData = columns.find(data => data.name === source.droppableId).data;
+
+  const destinationData = columns.find(data => data.name === destination.droppableId).data;
 
   const [removed] = sourceData.splice(source.index, 1);
   destinationData.splice(destination.index, 0, removed);
 
+  const sourceIndex = columns.findIndex(data => data.name === source.droppableId);
+  const destinationIndex = columns.findIndex(data => data.name === destination.droppableId);
 
-  return { [source.droppableId]: sourceData, [destination.droppableId]: destinationData };
+
+  columns =  [...columns]; 
+  columns[sourceIndex].data = sourceData;
+  columns[destinationIndex].data = destinationData;
+
+  console.log('Changed data ');
+  console.log({ columns });
+  
+
+  return { columns };
 };
+
+const moveToSameColumn = (source, destination, state) => {
+  const data = reorder(
+    state.columns.find(column => column.name === destination.droppableId).data,
+    source.index,
+    destination.index
+  );
+
+  const index = state.columns.findIndex(column => column.name === destination.droppableId);
+
+
+  const columnsArray = [...state.columns ];
+  columnsArray[index] = {...columnsArray[index], data};
+
+  return {columns: columnsArray};
+}
 
 
 function App() {
 
-  const [state, setState] = useState({ data: initial, secondColumnData: secondColumn });
+  const [state, setState] = useState({ columns });
 
   function onDragEnd({ destination, source }) {
 
-    if(!destination || !source){
+    console.log(source);
+    console.log(destination);
+
+
+    if (!destination || !source) {
       return;
     }
 
@@ -80,24 +115,9 @@ function App() {
 
 
     if (destination.droppableId !== source.droppableId) {
-      setState(changeColumn(source, destination, state));
+      setState(moveToDifferentColumn(source, destination, state));
     } else {
-
-      console.log(state[destination.droppableId]);
-
-      const data = reorder(
-        state[destination.droppableId],
-        source.index,
-        destination.index
-      );
-
-
-
-      console.log('new result');
-      console.log(data);
-
-      setState({ ...state, [destination.droppableId]: data });
-
+      setState(moveToSameColumn(source, destination, state));
     }
   }
 
@@ -109,53 +129,29 @@ function App() {
 
         <Row type="flex" justify="center">
 
+          {state.columns.map(column => (
 
-          <Col span={4}>
-            <Title class="App-title" level={4}>Todo</Title>
+            <Col span={4}>
+              <Title class="App-title" level={4}>{column.name}</Title>
 
-            <Droppable droppableId={"data"} isCombineEnabled={false} key={"tasklist"}>
-              {provided => (
+              <Droppable droppableId={column.name} isCombineEnabled={false} key={column.name}>
+                {provided => (
 
-                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  <div ref={provided.innerRef} {...provided.droppableProps}>
 
-                  <TaskList tasks={state.data} name={"first"}>
+                    <TaskList tasks={column.data} name={column.name}>
 
-                  </TaskList>
+                    </TaskList>
 
-
-                  {provided.placeholder}
-                </div>
-
-
-              )}
-            </Droppable>
-
-          </Col>
+                    <div style={{ height: 300, width: 300, marginRight: 16, marginTop: 8 }}> {provided.placeholder} </div>
+                  </div>
 
 
+                )}
+              </Droppable>
 
-          <Col span={4}>
-            <Title class="App-title" level={4}>In progress</Title>
-
-
-            <Droppable droppableId={"secondColumnData"} isCombineEnabled={false} key="abcd">
-              {provided => (
-
-                <div ref={provided.innerRef} {...provided.droppableProps}>
-
-                  <TaskList tasks={state.secondColumnData} name={"second"}>
-
-                  </TaskList>
-
-
-                  <div style={{ height: 300, width: 300, marginRight: 16, marginTop: 8 }}> {provided.placeholder} </div>
-                </div>
-
-
-              )}
-            </Droppable>
-
-          </Col>
+            </Col>
+          ))}
 
         </Row>
 
