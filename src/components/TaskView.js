@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea';
 import ReactMarkdown from 'react-markdown';
 
-import { useTasks } from './entities'
+import { useTasks } from '../entities'
 
 import './TaskView.css';
 export function WrappedTaskView({ match }) {

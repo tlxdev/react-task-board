@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import App from './App';
-import { WrappedTaskView } from './TaskView';
+import App from './components/App';
+import { WrappedTaskView } from './components/TaskView';
 import { useTasks } from './entities';
 
 function Main() {

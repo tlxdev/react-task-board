@@ -5,7 +5,7 @@ import TaskList from './TaskList';
 import { Col, Row, Layout, Menu, Icon, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { withRouter } from "react-router-dom";
-import { useTasks } from './entities';
+import { useTasks } from '../entities';
 import { Link } from 'react-router-dom'
 
 const { Sider, Content } = Layout;

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Meta from 'antd/lib/card/Meta';
 
-import { useTasks } from './entities';
+import { useTasks } from '../entities';
 
 
 function DraggableTaskCard({ data }) {
