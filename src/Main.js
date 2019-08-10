@@ -25,6 +25,4 @@ function Main() {
 
 }
 
-//  <Route path="/task/:taskId" component={WrappedTaskView} />
-
 export default Main;
