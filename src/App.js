@@ -84,7 +84,7 @@ function App(props) {
                       <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
 
                       {column.canAddTask &&
-                        <Button prefix="+" className="add-task-button" type="primary" size={"default"}>
+                        <Button className="green add-task-button" icon="plus-circle" type="primary" size={"default"}>
                           Add
                         </Button>
                       }
@@ -100,7 +100,7 @@ function App(props) {
 
                           </TaskList>
 
-                          <div style={{ height: 300, width: 300, marginRight: 16, marginTop: 8 }}> {provided.placeholder} </div>
+                          <div style={{ height: 300, width: 300, marginRight: 16 }}> {provided.placeholder} </div>
                         </div>
 
 

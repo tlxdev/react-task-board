@@ -13,12 +13,13 @@
 }
 
 .App-header {
-/*  min-height: 100vh;
+  /*  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  */additive-symbols: calc(10px + 2vmin);
+  */
+  additive-symbols: calc(10px + 2vmin);
   color: white;
 }
 
@@ -30,6 +31,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -62,4 +64,10 @@
 .add-task-button {
   margin-left: 16px;
   margin-bottom: 16px;
+}
+
+.green {
+  background-color: #52c41a;
+  border-color: #52c41a;
+  --antd-wave-shadow-color: #52c41a;
 }
