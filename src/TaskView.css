@@ -1,0 +1,49 @@
+.login-form {
+    width: 800px;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+form textarea.ant-input {
+    height: 200px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popover {
+    position: fixed;
+    top: 25vh;
+    left: 25vw;
+    background-color: #FFF;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.title-input {
+    font-weight: 700;
+    width: 100%;
+    font-size: 25px;
+    height: 48px;
+}
+
+.ant-form {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+textarea.edit-textarea {
+    height: 400px;
+}
+
+.form-item {
+    margin-bottom: 16px;
+}

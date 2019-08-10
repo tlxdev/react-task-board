@@ -3,6 +3,7 @@
 
 .App {
   text-align: center;
+  margin-top: 32px;
 }
 
 .App-logo {
@@ -12,7 +13,6 @@
 }
 
 .App-header {
-  background-color: #f7f7f8;
 /*  min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -49,4 +49,12 @@
   text-align: left;
   margin-left: 3px;
   font-size: 20px;
+}
+
+.blurred {
+  -webkit-filter: blur(8px);
+}
+
+.fullheight {
+  height: 100%;
 }

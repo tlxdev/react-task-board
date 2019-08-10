@@ -2,43 +2,15 @@ import React, { useState } from 'react';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TaskList from './TaskList';
-import { Col, Row } from 'antd';
+import { Col, Row, Layout, Menu, Icon } from 'antd';
 import Title from 'antd/lib/typography/Title';
 
+import { columns } from './data';
 
+import { withRouter } from "react-router-dom";
 
+const { Header, Sider, Content } = Layout;
 
-
-const firstCardData = `# Example data  
-let's render this
-abcdefg`
-
-const secondCardData = `# Second card  
-some INTeresting stuff`
-
-const initial = [firstCardData, secondCardData];
-
-
-const secondColumnData = `This data will be on the second column`;
-const secondColumn = [secondColumnData];
-
-
-
-
-const columns = [
-  {
-    name: 'Todo',
-    data: initial,
-  },
-  {
-    name: 'In progress',
-    data: secondColumn,
-  },
-  {
-    name: 'Done',
-    data: []
-  }
-];
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -66,13 +38,13 @@ const moveToDifferentColumn = (source, destination, state) => {
   const destinationIndex = columns.findIndex(data => data.name === destination.droppableId);
 
 
-  columns =  [...columns]; 
+  columns = [...columns];
   columns[sourceIndex].data = sourceData;
   columns[destinationIndex].data = destinationData;
 
   console.log('Changed data ');
   console.log({ columns });
-  
+
 
   return { columns };
 };
@@ -87,18 +59,25 @@ const moveToSameColumn = (source, destination, state) => {
   const index = state.columns.findIndex(column => column.name === destination.droppableId);
 
 
-  const columnsArray = [...state.columns ];
-  columnsArray[index] = {...columnsArray[index], data};
+  const columnsArray = [...state.columns];
+  columnsArray[index] = { ...columnsArray[index], data };
 
-  return {columns: columnsArray};
+  return { columns: columnsArray };
 }
 
 
-function App() {
+function App(props) {
 
   const [state, setState] = useState({ columns });
 
+  function clickMainDiv() {
+    if (props.blur) {
+      props.history.push('/')
+    }
+  }
+
   function onDragEnd({ destination, source }) {
+
 
     console.log(source);
     console.log(destination);
@@ -124,41 +103,67 @@ function App() {
 
 
   return (
-    <div className="App">
-      <DragDropContext onDragEnd={onDragEnd}>
 
-        <Row type="flex" justify="center">
+    <div className={`fullheight ${props.blur ? 'blurred' : ''} `} onClick={clickMainDiv} >
+      <Layout className="fullheight">
+        <Sider trigger={null} collapsible collapsed={false}>
+          <div className="logo" />
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1">
+              <Icon type="user" />
+              <span>nav 1</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="video-camera" />
+              <span>nav 2</span>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="upload" />
+              <span>nav 3</span>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Content>
 
-          {state.columns.map(column => (
+          <div class="App">
+            <DragDropContext onDragEnd={onDragEnd}>
 
-            <Col span={4}>
-              <Title class="App-title" level={4}>{column.name}</Title>
+              <Row type="flex" justify="center">
 
-              <Droppable droppableId={column.name} isCombineEnabled={false} key={column.name}>
-                {provided => (
+                {state.columns.map(column => (
 
-                  <div ref={provided.innerRef} {...provided.droppableProps}>
+                  <Col span={5}>
+                    <Title class="App-title" level={4}>{column.name} ({column.data.length})</Title>
 
-                    <TaskList tasks={column.data} name={column.name}>
+                    <Droppable droppableId={column.name} isCombineEnabled={false} key={column.name}>
+                      {provided => (
 
-                    </TaskList>
+                        <div ref={provided.innerRef} {...provided.droppableProps}>
 
-                    <div style={{ height: 300, width: 300, marginRight: 16, marginTop: 8 }}> {provided.placeholder} </div>
-                  </div>
+                          <TaskList tasks={column.data} name={column.name}>
+
+                          </TaskList>
+
+                          <div style={{ height: 300, width: 300, marginRight: 16, marginTop: 8 }}> {provided.placeholder} </div>
+                        </div>
 
 
-                )}
-              </Droppable>
+                      )}
+                    </Droppable>
 
-            </Col>
-          ))}
+                  </Col>
+                ))}
 
-        </Row>
+              </Row>
 
-      </DragDropContext>
+            </DragDropContext>
+          </div>
 
+        </Content>
+      </Layout>
     </div >
+
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import Task from './Task';
+import DraggableTaskCard from './DraggableTaskCard';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function TaskList({ tasks, name }) {
@@ -13,7 +13,7 @@ function TaskList({ tasks, name }) {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <Task data={task} ></Task>
+                    <DraggableTaskCard data={task} ></DraggableTaskCard>
                 </div>
             )}
         </Draggable>
