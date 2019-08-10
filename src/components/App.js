@@ -70,7 +70,7 @@ function App(props) {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Content>
+        <Content className="scrollbar-fix">
 
           <div className="App">
             <DragDropContext onDragEnd={onDragEnd}>

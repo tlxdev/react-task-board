@@ -69,3 +69,7 @@
 .confetti {
   margin-left: 100px;
 }
+
+.scrollbar-fix {
+  overflow-y: scroll;
+}
