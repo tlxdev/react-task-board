@@ -84,11 +84,13 @@ function App(props) {
                       <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
 
                       {column.canAddTask &&
-                        <Button className="green add-task-button" icon="plus-circle" type="primary" size={"default"}>
-                          Add
+                        <Link to="/task/new">
+                          <Button className="add-task-button" icon="plus" type="link" size={"default"}>
+                            Add
                         </Button>
+                        </Link>
                       }
-                      
+
                     </Row>
 
                     <Droppable droppableId={column.name} isCombineEnabled={false}>

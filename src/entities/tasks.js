@@ -50,6 +50,21 @@ export const moveTaskInSameColumn = (counter) => (columnName, sourceTaskIndex, t
 
 }
 
+
+export const addNewTask = (counter) => (task) => {
+
+    const columnsWithNewTask = [...counter.state.columns];
+    const tasksWithNewTask = [...counter.state.tasks];
+
+    const newTask = { id: tasksWithNewTask.length + 1, ...task };
+
+    tasksWithNewTask.push(newTask);
+
+    columnsWithNewTask[0].tasks.push(newTask.id);
+
+    counter.setState({ ...counter.state, columns: columnsWithNewTask, tasks: tasksWithNewTask })
+}
+
 export const loadTasks = (counter) => () => {
     counter.setState({ ...loadState() });
 }

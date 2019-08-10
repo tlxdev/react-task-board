@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import App from './components/App';
 import { TaskView } from './components/TaskView';
 import { useTasks } from './entities';
+import { Settings } from './components/Settings';
 
 function Main() {
 
@@ -21,6 +22,7 @@ function Main() {
         <Route path="/" exact component={App} />
         <Route path="/task/:id" render={() => <App blur={true}></App>} />
         <Route path="/task/:taskId" component={TaskView} />
+        <Route path="/settings" component={Settings} />
     </BrowserRouter>);
 
 }

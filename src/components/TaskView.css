@@ -22,7 +22,7 @@ form textarea.ant-input {
 
 .popover {
     position: fixed;
-    top: 25vh;
+    top: 20vh;
     left: 25vw;
     background-color: #FFF;
     padding: 32px;
@@ -30,10 +30,16 @@ form textarea.ant-input {
 }
 
 .title-input {
-    font-weight: 700;
+    font-weight: 600;
     width: 100%;
     font-size: 25px;
     height: 48px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.title-input::placeholder {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.35);
 }
 
 .ant-form {
