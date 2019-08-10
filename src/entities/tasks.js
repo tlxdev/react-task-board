@@ -1,44 +1,10 @@
+import { saveState, loadState } from '../utils/localstorage';
+
 const arrayMove = require('array-move');
 
-const firstTask = {
-    id: 1,
-    title: 'Add header',
-    text: `Example data  
-  let's render this
-  abcdefg`
-}
-
-const secondTask = {
-    id: 2,
-    title: 'Add users',
-    text: `# Second card  
-  some INTeresting stuff`}
-
-
-const thirdTask = { id: 3, title: 'Add nav drawer', text: `This data will be on the second column` };
-
-
-
 export const initialState = {
-    columns: [
-        {
-            name: 'Todo',
-            tasks: [1, 2]
-        },
-        {
-            name: 'In progress',
-            tasks: [3]
-        },
-        {
-            name: 'Done',
-            tasks: []
-        },
-    ],
-    tasks: [
-        firstTask,
-        secondTask,
-        thirdTask
-    ]
+    columns: [],
+    tasks: []
 };
 
 export const setTask = (counter) => task => {
@@ -49,6 +15,7 @@ export const setTask = (counter) => task => {
 
 
     counter.setState({ ...counter.state, tasks: tasksClone })
+
 }
 
 export const moveTaskBetweenColumns = (counter) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
@@ -68,7 +35,8 @@ export const moveTaskBetweenColumns = (counter) => (sourceColumnName, targetColu
     })
 
 
-    counter.setState({ ...counter.state, columns: newArrayData })
+    counter.setState({ ...counter.state, columns: newArrayData });
+
 }
 
 export const moveTaskInSameColumn = (counter) => (columnName, sourceTaskIndex, targetTaskIndex) => {
@@ -79,4 +47,14 @@ export const moveTaskInSameColumn = (counter) => (columnName, sourceTaskIndex, t
     targetColumn.tasks = arrayMove(targetColumn.tasks, sourceTaskIndex, targetTaskIndex);
 
     counter.setState({ ...counter.state, columns: columnsCopy })
+
+}
+
+export const loadTasks = (counter) => () => {
+    counter.setState({ ...loadState() });
+}
+
+
+export const saveTasks = (counter) => () => {
+    saveState(counter.state);
 }

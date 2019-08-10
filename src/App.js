@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TaskList from './TaskList';
-import { Col, Row, Layout, Menu, Icon } from 'antd';
+import { Col, Row, Layout, Menu, Icon, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { withRouter } from "react-router-dom";
 import { useTasks } from './entities';
+import { Link } from 'react-router-dom'
 
 const { Sider, Content } = Layout;
 
@@ -52,16 +53,20 @@ function App(props) {
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
+              <Link to="/">
+                <Icon type="user" />
+                <span>Task board</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
+              <Link to="/settings">
+                <Icon type="setting" />
+                <span>Settings</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
+              <Icon type="question-circle" />
+              <span>About</span>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -75,7 +80,16 @@ function App(props) {
                 {tasks.columns.map(column => (
 
                   <Col span={5} key={"task-column-" + column.name}>
-                    <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
+                    <Row type="flex">
+                      <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
+
+                      {column.canAddTask &&
+                        <Button prefix="+" className="add-task-button" type="primary" size={"default"}>
+                          Add
+                        </Button>
+                      }
+                      
+                    </Row>
 
                     <Droppable droppableId={column.name} isCombineEnabled={false}>
                       {provided => (
