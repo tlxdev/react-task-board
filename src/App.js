@@ -1,76 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TaskList from './TaskList';
 import { Col, Row, Layout, Menu, Icon } from 'antd';
 import Title from 'antd/lib/typography/Title';
-
-import { columns } from './data';
-
 import { withRouter } from "react-router-dom";
 import { useTasks } from './entities';
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-// when changing columns
-const moveToDifferentColumn = (source, destination, state) => {
-
-
-  let columns = state.columns;
-
-
-  const sourceData = columns.find(data => data.name === source.droppableId).data;
-
-  const destinationData = columns.find(data => data.name === destination.droppableId).data;
-
-  const [removed] = sourceData.splice(source.index, 1);
-  destinationData.splice(destination.index, 0, removed);
-
-  const sourceIndex = columns.findIndex(data => data.name === source.droppableId);
-  const destinationIndex = columns.findIndex(data => data.name === destination.droppableId);
-
-
-  columns = [...columns];
-  columns[sourceIndex].data = sourceData;
-  columns[destinationIndex].data = destinationData;
-
-  console.log('Changed data ');
-  console.log({ columns });
-
-
-  return { columns };
-};
-
-const moveToSameColumn = (source, destination, state) => {
-  const data = reorder(
-    state.columns.find(column => column.name === destination.droppableId).data,
-    source.index,
-    destination.index
-  );
-
-  const index = state.columns.findIndex(column => column.name === destination.droppableId);
-
-
-  const columnsArray = [...state.columns];
-  columnsArray[index] = { ...columnsArray[index], data };
-
-  return { columns: columnsArray };
-}
 
 
 function App(props) {
 
 
-  const [tasks, { setTask, moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
+  const [tasks, { moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
 
   function clickMainDiv() {
     if (props.blur) {
@@ -79,11 +24,6 @@ function App(props) {
   }
 
   function onDragEnd({ destination, source }) {
-
-
-    console.log(source);
-    console.log(destination);
-
 
     if (!destination || !source) {
       return;

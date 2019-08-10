@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
-import { Card, Avatar } from 'antd';
+import { Card } from 'antd';
 
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ import { useTasks } from './entities';
 function DraggableTaskCard({ data }) {
 
 
-    const [tasks, { setTask, moveTaskBetweenColumns }] = useTasks();
+    const [tasks] = useTasks();
 
     const [state, setState] = useState({});
 
@@ -21,7 +21,7 @@ function DraggableTaskCard({ data }) {
 
     useEffect(() => {
         setState({ ...tasks.tasks.find(taskIter => taskIter.id === data) });
-    }, [tasks]);
+    }, [tasks, data]);
 
 
 

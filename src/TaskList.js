@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import DraggableTaskCard from './DraggableTaskCard';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 function TaskList({ tasks, name }) {
     return tasks ? tasks.map((task, index) => (
