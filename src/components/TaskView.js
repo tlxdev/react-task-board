@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import { useTasks } from '../entities'
 
 import './TaskView.css';
-export function WrappedTaskView({ match }) {
+export function TaskView({ match }) {
 
   const [tasks, { setTask }] = useTasks();
 
