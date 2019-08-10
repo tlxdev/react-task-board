@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function TaskList({ tasks, name }) {
     return tasks ? tasks.map((task, index) => (
-        <Draggable draggableId={name+index.toString()} index={index}>
+        <Draggable key={"task-list-draggable-" + index} draggableId={name+index.toString()} index={index}>
             {provided => (
                 <div className="Task-card" 
                     ref={provided.innerRef}

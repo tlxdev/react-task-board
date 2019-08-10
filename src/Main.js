@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import App from './App';
-import TaskView, { WrappedTaskView } from './TaskView';
+import  { WrappedTaskView } from './TaskView';
 
 const Main = () => (
     <BrowserRouter>

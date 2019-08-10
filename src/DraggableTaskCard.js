@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import { Card, Avatar } from 'antd';
 
@@ -7,16 +7,25 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Meta from 'antd/lib/card/Meta';
 
+import { useTasks } from './entities';
+
+
 function DraggableTaskCard({ data }) {
 
 
-    const [state, setState] = useState({ data });
+    const [tasks, { setTask, moveTaskBetweenColumns }] = useTasks();
+
+    const [state, setState] = useState({});
+
     const [isEditing, setIsEditing] = useState(false);
 
+    useEffect(() => {
+        setState({ ...tasks.tasks.find(taskIter => taskIter.id === data) });
+    }, [tasks]);
 
-    const onClick = () => {
-        window.location.href = "/task/" + state.data.id;
-    }
+
+
+
 
     const handleChange = useCallback(async (event) => {
         // don't send again while we are sending
@@ -33,13 +42,13 @@ function DraggableTaskCard({ data }) {
     return !isEditing ? (
         <div>
 
-            <Link to={`/task/${data.id}`}>
+            <Link to={`/task/${state.id}`}>
                 <Card style={{ width: 300, textAlign: "left" }}>
                     <div >
 
                         <Meta
-                            title={`#${data.id} ${data.title}`}
-                            description={<ReactMarkdown source={data.text} />}
+                            title={`#${state.id} ${state.title}`}
+                            description={<ReactMarkdown source={state.text} />}
                         />
 
 

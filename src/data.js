@@ -25,7 +25,7 @@ const firstCardData = {
   
   
   
-  export const columns = [
+  export let columns = [
     {
       name: 'Todo',
       data: initial,

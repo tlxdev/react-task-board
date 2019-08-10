@@ -8,6 +8,7 @@ import Title from 'antd/lib/typography/Title';
 import { columns } from './data';
 
 import { withRouter } from "react-router-dom";
+import { useTasks } from './entities';
 
 const { Header, Sider, Content } = Layout;
 
@@ -68,7 +69,8 @@ const moveToSameColumn = (source, destination, state) => {
 
 function App(props) {
 
-  const [state, setState] = useState({ columns });
+
+  const [tasks, { setTask, moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
 
   function clickMainDiv() {
     if (props.blur) {
@@ -94,9 +96,9 @@ function App(props) {
 
 
     if (destination.droppableId !== source.droppableId) {
-      setState(moveToDifferentColumn(source, destination, state));
+      moveTaskBetweenColumns(source.droppableId, destination.droppableId, source.index, destination.index);
     } else {
-      setState(moveToSameColumn(source, destination, state));
+      moveTaskInSameColumn(source.droppableId, source.index, destination.index);
     }
   }
 
@@ -125,22 +127,22 @@ function App(props) {
         </Sider>
         <Content>
 
-          <div class="App">
+          <div className="App">
             <DragDropContext onDragEnd={onDragEnd}>
 
               <Row type="flex" justify="center">
 
-                {state.columns.map(column => (
+                {tasks.columns.map(column => (
 
-                  <Col span={5}>
-                    <Title class="App-title" level={4}>{column.name} ({column.data.length})</Title>
+                  <Col span={5} key={"task-column-" + column.name}>
+                    <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
 
-                    <Droppable droppableId={column.name} isCombineEnabled={false} key={column.name}>
+                    <Droppable droppableId={column.name} isCombineEnabled={false}>
                       {provided => (
 
                         <div ref={provided.innerRef} {...provided.droppableProps}>
 
-                          <TaskList tasks={column.data} name={column.name}>
+                          <TaskList tasks={column.tasks} name={column.name}>
 
                           </TaskList>
 
