@@ -96,13 +96,13 @@ function App(props) {
                     <Droppable droppableId={column.name} isCombineEnabled={false}>
                       {provided => (
 
-                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                        <div ref={provided.innerRef} {...provided.droppableProps} style={{minHeight: 'calc(100vh - 100px)'}}>
 
                           <TaskList tasks={column.tasks} name={column.name}>
 
                           </TaskList>
 
-                          <div style={{ height: 300, width: 300, marginRight: 16 }}> {provided.placeholder} </div>
+                          <div style={{ height: '100%', width: 300, marginRight: 16 }}> {provided.placeholder} </div>
                         </div>
 
 

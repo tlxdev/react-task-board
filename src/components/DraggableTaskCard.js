@@ -20,7 +20,7 @@ const confettiConfig = {
     stagger: 0,
     width: "10px",
     height: "10px",
-    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
 };
 
 
@@ -79,9 +79,8 @@ function DraggableTaskCard({ data }) {
 
     return !isEditing ? (
         <div>
+            <Confetti className="confetti" active={showAnim} style={{}} config={confettiConfig}/>
 
-
-            <Confetti active={showAnim} />
             <Link to={`/task/${state.id}`}>
                 <Card style={{ width: 300, textAlign: "left" }}>
                     <div >
