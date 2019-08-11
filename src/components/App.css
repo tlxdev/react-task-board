@@ -73,3 +73,22 @@
 .scrollbar-fix {
   overflow-y: scroll;
 }
+
+.dark-overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.ant-menu-dark,
+.ant-layout-sider {
+  background: #263238;
+}
+
+.row-placeholder {
+  height: 100%;
+  width: 300px;
+  margin-right: 16px;
+}

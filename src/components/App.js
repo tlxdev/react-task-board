@@ -46,9 +46,9 @@ function App(props) {
 
 
   return (
-
-    <div className={`fullheight ${props.blur ? 'blurred' : ''} `} onClick={clickMainDiv} >
-      <Layout className="fullheight">
+    <div className={`fullheight`} onClick={clickMainDiv} >
+      {props.blur && <div className='dark-overlay'></div>}
+      <Layout className={`fullheight ${props.blur ? 'blurred' : ''}`}>
         <Sider trigger={null} collapsible collapsed={false}>
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
@@ -72,7 +72,7 @@ function App(props) {
         </Sider>
         <Content className="scrollbar-fix">
 
-          <div className="App">
+          <div className="App" justify="center">
             <DragDropContext onDragEnd={onDragEnd}>
 
               <Row type="flex" justify="center">
@@ -96,13 +96,13 @@ function App(props) {
                     <Droppable droppableId={column.name} isCombineEnabled={false}>
                       {provided => (
 
-                        <div ref={provided.innerRef} {...provided.droppableProps} style={{minHeight: 'calc(100vh - 100px)'}}>
+                        <div ref={provided.innerRef} {...provided.droppableProps} style={{ minHeight: '100%'/*'calc(100vh - 100px)'*/ }}>
 
                           <TaskList tasks={column.tasks} name={column.name}>
 
                           </TaskList>
 
-                          <div style={{ height: '100%', width: 300, marginRight: 16 }}> {provided.placeholder} </div>
+                          <div className="row-placeholder"> {provided.placeholder} </div>
                         </div>
 
 
