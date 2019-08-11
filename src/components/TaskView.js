@@ -23,12 +23,12 @@ export function TaskView({ match }) {
 
   useEffect(() => {
 
-    if (state.title === '' && tasks.tasks && match.params.taskId !== 'new') {
-      const taskForId = tasks.tasks.find(taskIter => taskIter.id === Number(match.params.taskId));
+    if (match.params.taskId !== 'new' && tasks.tasks && state.title === '') {
+        const taskForId = tasks.tasks.find(taskIter => taskIter.id === Number(match.params.taskId));
       if (taskForId) {
         setState(taskForId);
       }
-    } else {
+    } else if(match.params.taskId && state.title === '' ) {
       setIsNew(true);
     }
     // We dont want tasks as dep
@@ -43,8 +43,7 @@ export function TaskView({ match }) {
     if (!isNew) {
       setTask(state)
     }
-
-  }, [state, setTask]);
+  }, [state, setTask, isNew]);
 
   const setTitle = (title => {
     setState({ ...state, title })
@@ -75,7 +74,7 @@ export function TaskView({ match }) {
         <Col span={12}>
           <TextArea className="edit-textarea form-item" rows={4} value={state.text} placeholder="Type task description in Markdown" onChange={e => setText(e.target.value)} />
         </Col>
-        <Col span={11} style={{ marginLeft: 16 }}><ReactMarkdown source={state.text} /></Col>
+        <Col span={11} style={{ marginLeft: 16 }}><ReactMarkdown source={state.text} linkTarget={"_blank"} /></Col>
         <Link to="/">
           <Button type="primary" htmlType="submit" className="login-form-button" onClick={save}>
             Save

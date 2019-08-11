@@ -15,15 +15,15 @@ const initialTasks = [
      {
          id: 2,
          title: 'Create a demo for application features',
-         text: `![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+         text: `![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")323213232
      
      
-     With markdown you can add images on tasks
-     
- [https://www.github.com]
-     
-     
-     Or links
+         With markdown you can add images on tasks
+         
+         
+    [https://github.com/rexxars/react-markdown](//github.com/rexxars/react-markdown)
+         
+    Or links
      `},
 
 ]
@@ -70,3 +70,15 @@ export const saveState = (state) => {
         // ignore write errors
     }
 };
+
+export const exportData = (data) => {
+    data = JSON.stringify(data, null, 2);
+    let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(data);
+    
+    let exportFileDefaultName = 'exported-data.json';
+    
+    let linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+}
