@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './App.css';
 import { Layout, Menu, Icon, Button, Switch, Row } from 'antd';
 import { Link } from 'react-router-dom'
 import { exportData } from '../utils/localstorage';
@@ -8,12 +7,11 @@ import { useTasks } from '../entities';
 
 import { Typography } from 'antd';
 
+import './App.css';
+import './Settings.css';
+
 const { Title } = Typography;
-
-
-
 const { Sider } = Layout;
-
 
 
 export function Settings() {
@@ -56,36 +54,33 @@ export function Settings() {
                 minHeight: 280,
             }}>
 
-            <Title level={2} style={{marginBottom: 24}}>Settings</Title>
-            
+                <Title level={2} className="settings-title">Settings</Title>
 
-            <Row>
-                <Switch style={{ width: 24, marginRight: 4, marginBottom: 8 }}>Night mode</Switch>
-                <span style={{marginTop: 8}}> Dark mode</span>
-            </Row>
 
-            <Row>
-                <Switch defaultChecked style={{ width: 24, marginRight: 4, marginBottom: 8 }}>Night mode</Switch>
-                <span style={{marginTop: 8}}> Enable confetti animation</span>
-            </Row>
+                <Row>
+                    <Switch className="settings-switch" >Night mode</Switch>
+                    <span className="settings-switch-text"> Dark mode</span>
+                </Row>
 
-            
-            <Row>
-                <Switch defaultChecked style={{ width: 24, marginRight: 4, marginBottom: 8 }}>Night mode</Switch>
-                <span style={{marginTop: 8}}>Show task contents on task board</span>
-            </Row>
+                <Row>
+                    <Switch defaultChecked className="settings-switch" >Night mode</Switch>
+                    <span className="settings-switch-text"> Enable confetti animation</span>
+                </Row>
 
-            <Row>
-            
-            <Button type="normal" icon="download" size="default" style={{ marginTop: 24, width: 164 }}>
-                Import data
-            </Button>
 
-            <Button type="primary" icon="download" size="default" style={{ marginLeft: 16, marginTop: 24, width: 164 }} onClick={clickExport}>
-                Export data
-            </Button>
+                <Row>
+                    <Switch defaultChecked className="settings-switch">Night mode</Switch>
+                    <span className="settings-switch-text">Show task contents on task board</span>
+                </Row>
 
-            </Row>
+                <Row>
+                    <Button type="normal" icon="download" size="default" className="settings-button">
+                        Import data
+                    </Button>
+                    <Button type="primary" icon="download" size="default" className="settings-button" onClick={clickExport}>
+                        Export data
+                </Button>
+                </Row>
 
 
             </Layout>
