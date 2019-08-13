@@ -8,14 +8,14 @@ const initialTasks = [
         text: 'You can write markdown, and instantly preview it while typing. Isn\'t that nice?'
     },
     {
-         id: 1,
-         title: 'Test the application out', text:
-             'Drag and drop the task cards around to move them between columns.'
-     },
-     {
-         id: 2,
-         title: 'Create a demo for application features',
-         text: `![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")323213232
+        id: 1,
+        title: 'Test the application out', text:
+            'Drag and drop the task cards around to move them between columns.'
+    },
+    {
+        id: 2,
+        title: 'Create a demo for application features',
+        text: `![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")323213232
      
      
          With markdown you can add images on tasks
@@ -61,6 +61,15 @@ export const loadState = () => {
     }
 };
 
+
+const loadStateFromData = (data) => {
+    try {
+        return JSON.parse(data);
+    } catch (err) {
+        return undefined;
+    }
+};
+
 export const saveState = (state) => {
     state.tasks.forEach(task => delete task.previousColumn);
     try {
@@ -73,12 +82,27 @@ export const saveState = (state) => {
 
 export const exportData = (data) => {
     data = JSON.stringify(data, null, 2);
-    let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(data);
-    
+    let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
+
     let exportFileDefaultName = 'exported-data.json';
-    
+
     let linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
+}
+
+
+export const getFileData = () => {
+    return new Promise((resolve, reject) => {
+        let linkElement = document.createElement('input');
+        linkElement.setAttribute('type', 'file');
+        linkElement.setAttribute('accept', '.json');
+        linkElement.click();
+        linkElement.addEventListener('change', (event => {
+            const reader = new FileReader()
+            reader.onload = (event) => resolve(loadStateFromData(event.target.result));
+            reader.readAsText(event.target.files[0])
+        }), false);
+    });
 }

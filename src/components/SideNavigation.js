@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 
 const { Sider } = Layout;
 
-export function SideNavigation({selectedPage}) {
-    return (  <Sider trigger={null} collapsible collapsed={false}>
+export function SideNavigation({ selectedPage }) {
+    return (<Sider trigger={null} collapsible collapsed={false}>
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedPage]}>
             <Menu.Item key="1">
@@ -22,8 +22,10 @@ export function SideNavigation({selectedPage}) {
                 </Link>
             </Menu.Item>
             <Menu.Item key="3">
-                <Icon type="question-circle" />
-                <span>About</span>
+                <Link to="/about">
+                    <Icon type="question-circle" />
+                    <span>About</span>
+                </Link>
             </Menu.Item>
         </Menu>
     </Sider>);

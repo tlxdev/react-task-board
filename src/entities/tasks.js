@@ -85,3 +85,7 @@ export const saveTasks = (counter) => () => {
     // Save state to localstorage
     saveState(counter.state);
 }
+
+export const importData = (counter) => (data) => {
+    counter.setState({ ...data });
+}

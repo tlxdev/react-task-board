@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Layout, Button, Switch, Row } from 'antd';
-import { exportData } from '../utils/localstorage';
+import { exportData, getFileData } from '../utils/localstorage';
 import { useTasks } from '../entities';
 
 import { Typography } from 'antd';
@@ -15,14 +15,20 @@ const { Title } = Typography;
 
 export function Settings() {
 
-    const [tasks] = useTasks();
+    const [tasks, { importData }] = useTasks();
 
     function clickExport() {
         exportData(tasks);
     }
 
+    function clickImport() {
+        getFileData().then(data => {
+            importData(data)
+        });
+    }
+
     return (<Layout className="fullheight">
-        <SideNavigation selectedPage={'2'}/>
+        <SideNavigation selectedPage={'2'} />
 
         <Layout type="flex" justify="center">
             <Layout style={{
@@ -54,7 +60,7 @@ export function Settings() {
                 </Row>
 
                 <Row>
-                    <Button type="normal" icon="download" size="default" className="settings-button">
+                    <Button type="normal" icon="download" size="default" className="settings-button" onClick={clickImport}>
                         Import data
                     </Button>
                     <Button type="primary" icon="download" size="default" className="settings-button" onClick={clickExport}>
