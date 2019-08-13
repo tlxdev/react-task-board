@@ -2,13 +2,14 @@ import React from 'react';
 import './App.css';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TaskList from './TaskList';
-import { Col, Row, Layout, Menu, Icon, Button } from 'antd';
+import { Col, Row, Layout, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { withRouter } from "react-router-dom";
 import { useTasks } from '../entities';
 import { Link } from 'react-router-dom'
+import { SideNavigation } from './SideNavigation';
 
-const { Sider, Content } = Layout;
+const { Content } = Layout;
 
 
 
@@ -49,27 +50,9 @@ function App(props) {
     <div className={`fullheight`} onClick={clickMainDiv} >
       {props.blur && <div className='dark-overlay'></div>}
       <Layout className={`fullheight ${props.blur ? 'blurred' : ''}`}>
-        <Sider trigger={null} collapsible collapsed={false}>
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Link to="/">
-                <Icon type="user" />
-                <span>Task board</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/settings">
-                <Icon type="setting" />
-                <span>Settings</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="question-circle" />
-              <span>About</span>
-            </Menu.Item>
-          </Menu>
-        </Sider>
+
+        <SideNavigation selectedPage={'1'} />
+
         <Content className="scrollbar-fix">
 
           <div className="App" justify="center">
