@@ -55,10 +55,10 @@ function App(props) {
 
         <Content className="scrollbar-fix">
 
-          <div className="App" justify="center">
+          <div className="App full-height" justify="center">
             <DragDropContext onDragEnd={onDragEnd}>
 
-              <Row type="flex" justify="center">
+              <Row type="flex" justify="center" className="full-height">
 
                 {tasks.columns.map(column => (
 
@@ -79,7 +79,7 @@ function App(props) {
                     <Droppable droppableId={column.name} isCombineEnabled={false}>
                       {provided => (
 
-                        <div ref={provided.innerRef} {...provided.droppableProps} style={{ minHeight: '100%'/*'calc(100vh - 100px)'*/ }}>
+                        <div ref={provided.innerRef} {...provided.droppableProps} className="full-height">
 
                           <TaskList tasks={column.tasks} name={column.name}>
 
