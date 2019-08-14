@@ -17,18 +17,11 @@ export function About() {
         <SideNavigation selectedPage={'3'}/>
 
         <Layout type="flex" justify="center">
-            <Layout style={{
-                background: '#fff',
-                padding: 24,
-                marginLeft: 24,
-                marginTop: 24,
-                marginRight: 24,
-                minHeight: 280,
-            }}>
+            <Layout className="page-layout">
 
                 <Title level={2} className="settings-title">About</Title>
 
-                Created by <a href="https://github.com/tanlah">https://github.com/tanlah</a>
+                Created by Taneli <a href="https://github.com/tanlah">https://github.com/tanlah</a>
 
 
             </Layout>

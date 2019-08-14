@@ -26,7 +26,6 @@ function App(props) {
   }
 
   function onDragEnd({ destination, source }) {
-
     if (!destination || !source) {
       return;
     }
@@ -35,16 +34,12 @@ function App(props) {
       return;
     }
 
-
-
     if (destination.droppableId !== source.droppableId) {
       moveTaskBetweenColumns(source.droppableId, destination.droppableId, source.index, destination.index);
     } else {
       moveTaskInSameColumn(source.droppableId, source.index, destination.index);
     }
   }
-
-
 
   return (
     <div className={`fullheight`} onClick={clickMainDiv} >
@@ -61,11 +56,10 @@ function App(props) {
               <Row type="flex" justify="center" className="full-height">
 
                 {tasks.columns.map(column => (
-
                   <Col span={5} key={"task-column-" + column.name}>
+
                     <Row type="flex">
                       <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
-
                       {column.canAddTask &&
                         <Link to="/task/new">
                           <Button className="add-task-button" icon="plus" type="link" size={"default"}>
@@ -73,28 +67,20 @@ function App(props) {
                         </Button>
                         </Link>
                       }
-
                     </Row>
 
                     <Droppable droppableId={column.name} isCombineEnabled={false}>
                       {provided => (
-
                         <div ref={provided.innerRef} {...provided.droppableProps} className="full-height">
-
                           <TaskList tasks={column.tasks} name={column.name}>
-
                           </TaskList>
-
                           <div className="row-placeholder"> {provided.placeholder} </div>
                         </div>
-
-
                       )}
                     </Droppable>
 
                   </Col>
                 ))}
-
               </Row>
 
             </DragDropContext>
