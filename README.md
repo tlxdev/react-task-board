@@ -18,3 +18,10 @@ To install dependencies and run the project, do
 
 `npm install`   
 `npm run start`
+
+
+## Tech stack
+- React w/ hooks  
+- Redux-style state management using react-entities  
+- Ant design  
+- react-beautiful-dnd
