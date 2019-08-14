@@ -19,7 +19,7 @@ function Main() {
         }
     }, [tasks, loadTasks, saveTasks]);
 
-    return (<BrowserRouter>
+    return (<BrowserRouter basename={process.env.PUBLIC_URL}>
         <Route path="/" exact component={App} />
         <Route path="/task/:id" render={() => <App blur={true}></App>} />
         <Route path="/task/:taskId" component={TaskView} />
