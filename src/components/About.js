@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layout, Button, Switch, Row } from 'antd';
+import { Layout } from 'antd';
 
 import { Typography } from 'antd';
 
