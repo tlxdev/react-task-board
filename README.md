@@ -7,7 +7,10 @@ A simple task board. Features:
 * Support for importing and exporting task data in a human-readable format
 * Saving data in backend with multi-user, comments etc will be added later
 
-# Running
+## Media
+![](https://i.imgur.com/b42Mhe7.gif)
+
+## Running
 Prerequisites: 
 * nodejs & npm
 

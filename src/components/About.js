@@ -28,6 +28,7 @@ export function About() {
 
                 <Title level={2} className="settings-title">About</Title>
 
+                Created by <a href="https://github.com/tanlah">https://github.com/tanlah</a>
 
 
             </Layout>

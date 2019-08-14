@@ -14,17 +14,16 @@ const initialTasks = [
     },
     {
         id: 2,
-        title: 'Create a demo for application features',
-        text: `![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")323213232
-     
-     
-         With markdown you can add images on tasks
-         
-         
-    [https://github.com/rexxars/react-markdown](//github.com/rexxars/react-markdown)
-         
-    Or links
-     `},
+        title: 'Edit a task',
+        text: `Edit a task and type some markdown. 
+        Some examples about possibilities are ![Images](https://icon-library.net/images/react-icon/react-icon-13.jpg)
+
+or links
+https://www.github.com/tanlah`},
+     {
+        id: 3,
+        title: 'Visit the application',
+        text: `Use react-task-board by navigating to it`},
 
 ]
 
@@ -36,11 +35,11 @@ const initialColumns = [
     },
     {
         name: 'In progress',
-        tasks: []
+        tasks: [2]
     },
     {
         name: 'Done',
-        tasks: [2],
+        tasks: [3],
         showConfetti: true
     }
 ]
