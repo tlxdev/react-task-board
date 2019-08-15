@@ -56,7 +56,7 @@ function App(props) {
               <Row type="flex" justify="center" className="full-height">
 
                 {tasks.columns.map(column => (
-                  <Col span={5} key={"task-column-" + column.name}>
+                  <Col xs={{span: 24}} md={{span: 12}} lg={{span: 12}} xl={{span:6}} key={"task-column-" + column.name}>
 
                     <Row type="flex">
                       <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>

@@ -49,6 +49,7 @@
   text-align: left;
   margin-left: 3px;
   font-size: 20px;
+  margin-bottom: 16px;
 }
 
 .blurred {
@@ -61,7 +62,6 @@
 
 .add-task-button {
   margin-left: 16px;
-  margin-bottom: 16px;
 }
 
 .green {
