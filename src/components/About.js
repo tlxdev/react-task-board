@@ -10,7 +10,7 @@ import { SideNavigation } from './SideNavigation';
 
 const { Title } = Typography;
 
-
+// The about view
 export function About() {
 
     return (<Layout className="fullheight">

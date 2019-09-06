@@ -6,6 +6,8 @@ import { Draggable } from "react-beautiful-dnd";
 import Confetti from 'react-dom-confetti';
 import { useTaskPreviousColumns, useTasks } from '../entities';
 
+// The task list view for a column
+// Contains all the cards for the column
 function TaskList({ tasks, name }) {
 
 
@@ -18,6 +20,7 @@ function TaskList({ tasks, name }) {
     const [taskPreviousColumns, { setTaskPreviousColumns }] = useTaskPreviousColumns();
 
 
+    // Handles diffing column data & showing confetti animation
     useEffect(() => {
         if (tasksData && tasksData.columns && tasksData.columns.length > 0) {
 
@@ -26,6 +29,7 @@ function TaskList({ tasks, name }) {
             for (const column of tasksData.columns) {
                 for (const columnTask of column.tasks) {
 
+                    // Show animation if the card has been moved to column that has 'showConfetti' attribute
                     const taskData = taskPreviousColumns.tasks[columnTask];
                     if (taskData && column.name && taskData.previousColumn !== column.name && column.showConfetti) {
                         const data = { [columnTask]: true };

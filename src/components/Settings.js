@@ -12,7 +12,7 @@ import { SideNavigation } from './SideNavigation';
 
 const { Title } = Typography;
 
-
+// The settings view
 export function Settings() {
 
     const [tasks, { importData }] = useTasks();
