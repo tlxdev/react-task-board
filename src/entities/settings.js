@@ -1,7 +1,7 @@
 import { saveState, loadState } from "../utils/localstorage";
 
 export const initialState = {
-    darkMode: true,
+    darkMode: false,
     showContentsOnTaskBoard: true,
     enableConfettiAnimation: true,
     loaded: false,
