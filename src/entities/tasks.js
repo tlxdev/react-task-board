@@ -75,13 +75,13 @@ export const addNewTask = (counter) => (task) => {
     counter.setState({ ...counter.state, columns: columnsWithNewTask, tasks: tasksWithNewTask })
 }
 
-export const loadTasks = (counter) => () => {
+export const loadTasksFromLocalStorage = (counter) => () => {
     // Set state to data from localstorage
     counter.setState({ ...loadState() });
 }
 
 
-export const saveTasks = (counter) => () => {
+export const saveTasksToLocalStorage = (counter) => () => {
     // Save state to localstorage
     saveState(counter.state);
 }
