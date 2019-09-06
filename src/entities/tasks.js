@@ -7,25 +7,25 @@ export const initialState = {
     tasks: []
 };
 
-export const setTask = (counter) => task => {
-    // Find the tasks index intasks array
-    const forId = counter.state.tasks.findIndex(taskIter => taskIter.id === task.id);
+export const setTask = (tasksStore) => task => {
+    // Find the tasks index in tasks array
+    const forId = tasksStore.state.tasks.findIndex(taskIter => taskIter.id === task.id);
 
 
     // Replace the object located in that index with given param
-    const tasksClone = [...counter.state.tasks];
+    const tasksClone = [...tasksStore.state.tasks];
     tasksClone[forId] = task;
 
-    counter.setState({ ...counter.state, tasks: tasksClone })
+    tasksStore.setState({ ...tasksStore.state, tasks: tasksClone })
 
 }
 
-export const moveTaskBetweenColumns = (counter) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
+export const moveTaskBetweenColumns = (tasksStore) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
     // Find the task id for for given column and index
-    const targetTaskId = counter.state.columns.find(columnIter => columnIter.name === sourceColumnName).tasks[sourceTaskIndex];
+    const targetTaskId = tasksStore.state.columns.find(columnIter => columnIter.name === sourceColumnName).tasks[sourceTaskIndex];
 
     // For each column
-    const newArrayData = [...counter.state.columns].map(column => {
+    const newArrayData = [...tasksStore.state.columns].map(column => {
         // Remove the task from old column
         if (column.name === sourceColumnName) {
             column.tasks = column.tasks.filter(task => task !== targetTaskId);
@@ -40,13 +40,13 @@ export const moveTaskBetweenColumns = (counter) => (sourceColumnName, targetColu
     })
 
 
-    counter.setState({ ...counter.state, columns: newArrayData });
+    tasksStore.setState({ ...tasksStore.state, columns: newArrayData });
 
 }
 
-export const moveTaskInSameColumn = (counter) => (columnName, sourceTaskIndex, targetTaskIndex) => {
+export const moveTaskInSameColumn = (tasksStore) => (columnName, sourceTaskIndex, targetTaskIndex) => {
 
-    const columnsCopy = [...counter.state.columns];
+    const columnsCopy = [...tasksStore.state.columns];
 
     // Find the column to perform move in
     let targetColumn = columnsCopy.find(columnIter => columnIter.name === columnName);
@@ -54,14 +54,14 @@ export const moveTaskInSameColumn = (counter) => (columnName, sourceTaskIndex, t
     // Move the task from that columns source location to target location
     targetColumn.tasks = arrayMove(targetColumn.tasks, sourceTaskIndex, targetTaskIndex);
 
-    counter.setState({ ...counter.state, columns: columnsCopy })
+    tasksStore.setState({ ...tasksStore.state, columns: columnsCopy })
 }
 
 
-export const addNewTask = (counter) => (task) => {
+export const addNewTask = (tasksStore) => (task) => {
 
-    const columnsWithNewTask = [...counter.state.columns];
-    const tasksWithNewTask = [...counter.state.tasks];
+    const columnsWithNewTask = [...tasksStore.state.columns];
+    const tasksWithNewTask = [...tasksStore.state.tasks];
 
     // Create new task object, id made by auto incrementing
     const newTask = { id: tasksWithNewTask.length + 1, ...task };
@@ -72,20 +72,20 @@ export const addNewTask = (counter) => (task) => {
     // Add the new task into the first column(hardcoded for now)
     columnsWithNewTask[0].tasks.push(newTask.id);
 
-    counter.setState({ ...counter.state, columns: columnsWithNewTask, tasks: tasksWithNewTask })
+    tasksStore.setState({ ...tasksStore.state, columns: columnsWithNewTask, tasks: tasksWithNewTask })
 }
 
-export const loadTasksFromLocalStorage = (counter) => () => {
+export const loadTasksFromLocalStorage = (tasksStore) => () => {
     // Set state to data from localstorage
-    counter.setState({ ...loadState() });
+    tasksStore.setState({ ...loadState() });
 }
 
 
-export const saveTasksToLocalStorage = (counter) => () => {
+export const saveTasksToLocalStorage = (tasksStore) => () => {
     // Save state to localstorage
-    saveState(counter.state);
+    saveState(tasksStore.state);
 }
 
-export const importData = (counter) => (data) => {
-    counter.setState({ ...data });
+export const importData = (tasksStore) => (data) => {
+    tasksStore.setState({ ...data });
 }
