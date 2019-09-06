@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layout, Button, Switch, Row } from 'antd';
+import { Layout, Button, Switch, Row, notification } from 'antd';
 import { exportData, getFileData } from '../utils/localstorage';
 import { useTasks } from '../entities';
 
@@ -23,9 +23,19 @@ export function Settings() {
 
     function clickImport() {
         getFileData().then(data => {
-            importData(data)
+            importData(data);
+            showNotification();
         });
     }
+
+    
+    const showNotification = () => {
+        notification.open({
+        message: 'Data imported',
+        description:
+            'Your data has been succesfully imported.',
+        });
+    };
 
     return (<Layout className="fullheight">
         <SideNavigation selectedPage={'2'} />
