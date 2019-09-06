@@ -111,3 +111,20 @@ strong {
   margin-right: 24px;
   min-height: 280p;
 }
+
+.ant-card.dark {
+  background-color: #24292e;
+  border: 1px solid #24292e;
+}
+
+.fullheight.dark {
+  background-color: #262626;
+}
+
+.dark .ant-card-meta-title {
+  color: #F5F5F5;
+}
+
+.App-title.dark, .dark .text, .dark .ant-card-meta-description {
+  color: #CCC;
+}

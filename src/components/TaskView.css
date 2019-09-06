@@ -54,3 +54,30 @@ textarea.edit-textarea {
 .form-item {
     margin-bottom: 16px;
 }
+
+.popover.dark {
+    background-color: #24292e;
+}
+
+
+.dark .page-layout,
+.dark textarea,
+.dark input {
+    background-color: #263238;
+    border: 0;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+    color: #595959;
+}
+
+.dark input,
+.dark textarea,
+.dark p {
+    color: #CCC;
+}
+
+.dark input {
+    padding-left: 8px;
+}

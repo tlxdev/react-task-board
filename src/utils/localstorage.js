@@ -21,10 +21,11 @@ Some examples about possibilities are images
 
 or links
 https://www.github.com/tanlah`},
-     {
+    {
         id: 3,
         title: 'Visit the application',
-        text: `Use react-task-board by navigating to it`},
+        text: `Use react-task-board by navigating to it`
+    },
 
 ]
 
@@ -46,9 +47,9 @@ const initialColumns = [
 ]
 
 
-export const loadState = () => {
+export const loadState = (key) => {
     try {
-        const serializedState = localStorage.getItem('state');
+        const serializedState = localStorage.getItem(key);
         if (serializedState === null) {
             return {
                 columns: initialColumns,
@@ -70,11 +71,16 @@ const loadStateFromData = (data) => {
     }
 };
 
-export const saveState = (state) => {
-    state.tasks.forEach(task => delete task.previousColumn);
+export const saveState = (state, key) => {
+    if (state.tasks) {
+        state.tasks.forEach(task => delete task.previousColumn);
+    }
+    if(state.loaded){
+        //delete state.loaded;
+    }
     try {
         const serializedState = JSON.stringify(state);
-        localStorage.setItem('state', serializedState);
+        localStorage.setItem(key, serializedState);
     } catch {
         // ignore write errors
     }

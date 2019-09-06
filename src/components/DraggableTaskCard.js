@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Meta from 'antd/lib/card/Meta';
 
-import { useTasks } from '../entities';
+import { useTasks, useSettings } from '../entities';
 
 import './App.css';
 
@@ -17,6 +17,8 @@ function DraggableTaskCard({ data }) {
 
     const [state, setState] = useState({});
 
+    const [settings] = useSettings();
+
 
     useEffect(() => {
         setState({ ...tasks.tasks.find(taskIter => taskIter.id === data) });
@@ -24,9 +26,10 @@ function DraggableTaskCard({ data }) {
 
     return (<div>
         <Link to={`/task/${state.id}`}>
-            <Card style={{ width: 300, textAlign: "left" }}>
+            <Card style={{ width: 300, textAlign: "left" }} className={`${settings.darkMode ? 'dark' : ''}`}>
                 <div>
                     <Meta
+                        className={`${settings.darkMode ? 'dark' : ''}`}
                         title={`#${state.id} ${state.title}`}
                         description={<ReactMarkdown source={state.text} />}
                     />

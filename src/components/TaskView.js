@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import TextArea from 'antd/lib/input/TextArea';
 import ReactMarkdown from 'react-markdown';
 
-import { useTasks } from '../entities'
+import { useTasks, useSettings } from '../entities'
 
 import './TaskView.css';
 
@@ -19,6 +19,9 @@ export function TaskView({ match }) {
   const [state, setState] = useState({ title: '', text: '' });
 
   const [isNew, setIsNew] = useState(false);
+
+  const [settings] = useSettings();
+
 
 
   // Initialize local state using data from store
@@ -63,7 +66,7 @@ export function TaskView({ match }) {
 
 
 
-  return (state && <div className="popover">
+  return (state && <div className={`popover ${settings.darkMode ? 'dark' : ''}`}>
     <Row className="centered">
       <div className="task-form">
 
@@ -78,7 +81,7 @@ export function TaskView({ match }) {
           <TextArea className="edit-textarea form-item" rows={4} value={state.text} placeholder="Type task description in Markdown" onChange={e => setText(e.target.value)} />
         </Col>
 
-        <Col span={11} style={{ marginLeft: 16 }}><ReactMarkdown source={state.text} linkTarget={"_blank"} /></Col>
+        <Col span={11} style={{ marginLeft: 16 }}><ReactMarkdown className="markdown" source={state.text} linkTarget={"_blank"} /></Col>
 
         <Link to="/">
           <Button type="primary" htmlType="submit" className="task-form-button" onClick={save}>

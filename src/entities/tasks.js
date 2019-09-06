@@ -77,13 +77,13 @@ export const addNewTask = (tasksStore) => (task) => {
 
 export const loadTasksFromLocalStorage = (tasksStore) => () => {
     // Set state to data from localstorage
-    tasksStore.setState({ ...loadState() });
+    tasksStore.setState({ ...loadState('state') });
 }
 
 
 export const saveTasksToLocalStorage = (tasksStore) => () => {
     // Save state to localstorage
-    saveState(tasksStore.state);
+    saveState(tasksStore.state, 'state');
 }
 
 export const importData = (tasksStore) => (data) => {

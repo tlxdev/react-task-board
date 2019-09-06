@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Layout, Button, Switch, Row, notification } from 'antd';
 import { exportData, getFileData } from '../utils/localstorage';
-import { useTasks } from '../entities';
+import { useTasks, useSettings } from '../entities';
 
 import { Typography } from 'antd';
 
@@ -16,6 +16,9 @@ const { Title } = Typography;
 export function Settings() {
 
     const [tasks, { importData }] = useTasks();
+
+    
+    const [settings, { setDarkMode }] = useSettings();
 
     function clickExport() {
         exportData(tasks);
@@ -37,35 +40,32 @@ export function Settings() {
         });
     };
 
+    function changeDarkMode(checked) {
+        setDarkMode(checked);
+    }
+
     return (<Layout className="fullheight">
         <SideNavigation selectedPage={'2'} />
 
-        <Layout type="flex" justify="center">
-            <Layout style={{
-                background: '#fff',
-                padding: 24,
-                marginLeft: 24,
-                marginTop: 24,
-                marginRight: 24,
-                minHeight: 280,
-            }}>
+        <Layout type="flex" justify="center" className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
+            <Layout className="settings-card">
 
                 <Title level={2} className="settings-title">Settings</Title>
 
 
                 <Row>
-                    <Switch className="settings-switch" >Night mode</Switch>
-                    <span className="settings-switch-text"> Dark mode</span>
+                    <Switch className="settings-switch" onChange={changeDarkMode} checked={settings.darkMode}>Dark mode</Switch>
+                    <span className="settings-switch-text">Dark mode</span>
                 </Row>
 
                 <Row>
-                    <Switch defaultChecked className="settings-switch" >Night mode</Switch>
-                    <span className="settings-switch-text"> Enable confetti animation</span>
+                    <Switch defaultChecked className="settings-switch" >Confetti</Switch>
+                    <span className="settings-switch-text">Enable confetti animation</span>
                 </Row>
 
 
                 <Row>
-                    <Switch defaultChecked className="settings-switch">Night mode</Switch>
+                    <Switch defaultChecked className="settings-switch">Show contents</Switch>
                     <span className="settings-switch-text">Show task contents on task board</span>
                 </Row>
 

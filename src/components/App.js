@@ -5,7 +5,7 @@ import TaskList from './TaskList';
 import { Col, Row, Layout, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { withRouter } from "react-router-dom";
-import { useTasks } from '../entities';
+import { useTasks, useSettings } from '../entities';
 import { Link } from 'react-router-dom'
 import { SideNavigation } from './SideNavigation';
 
@@ -16,6 +16,8 @@ const { Content } = Layout;
 
 function App(props) {
 
+
+  const [settings] = useSettings();
 
   const [tasks, { moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
 
@@ -44,7 +46,7 @@ function App(props) {
   return (
     <div className={`fullheight`} onClick={clickMainDiv} >
       {props.blur && <div className='dark-overlay'></div>}
-      <Layout className={`fullheight ${props.blur ? 'blurred' : ''}`}>
+      <Layout className={`fullheight ${settings.darkMode ? 'dark' : ''} ${props.blur ? 'blurred' : ''}`}>
 
         <SideNavigation selectedPage={'1'} />
 
@@ -59,7 +61,7 @@ function App(props) {
                   <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 6 }} xxl={{ span: 5 }} key={"task-column-" + column.name}>
 
                     <Row type="flex">
-                      <Title className="App-title" level={4}>{column.name} ({column.tasks.length})</Title>
+                      <Title className={`App-title ${settings.darkMode ? 'dark' : ''}`} level={4}>{column.name} ({column.tasks.length})</Title>
                       {column.canAddTask &&
                         <Link to="/task/new">
                           <Button className="add-task-button" icon="plus" type="link" size={"default"}>

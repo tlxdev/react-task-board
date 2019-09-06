@@ -7,21 +7,24 @@ import { Typography } from 'antd';
 import './App.css';
 import './Settings.css';
 import { SideNavigation } from './SideNavigation';
+import { useSettings } from '../entities';
 
 const { Title } = Typography;
 
 // The about view
 export function About() {
 
-    return (<Layout className="fullheight">
-        <SideNavigation selectedPage={'3'}/>
+    const [settings] = useSettings();
 
-        <Layout type="flex" justify="center">
+    return (<Layout className="fullheight">
+        <SideNavigation selectedPage={'3'} />
+
+        <Layout type="flex" justify="center" className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
             <Layout className="page-layout">
 
                 <Title level={2} className="settings-title">About</Title>
 
-                Created by Taneli <a href="https://github.com/tanlah">https://github.com/tanlah</a>
+                <div className="text"><p>Created by Taneli</p> <a href="https://github.com/tanlah">https://github.com/tanlah</a></div>
 
 
             </Layout>
