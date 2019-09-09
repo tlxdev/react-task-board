@@ -48,7 +48,7 @@ export function Settings() {
         <SideNavigation selectedPage={'2'} />
 
         <Layout type="flex" justify="center" className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
-            <Layout className="settings-card">
+            <Layout className="page-card">
 
                 <Title level={2} className="settings-title">Settings</Title>
 

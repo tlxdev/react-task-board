@@ -20,7 +20,7 @@ export function About() {
         <SideNavigation selectedPage={'3'} />
 
         <Layout type="flex" justify="center" className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
-            <Layout className="page-layout">
+            <Layout className="page-card">
 
                 <Title level={2} className="settings-title">About</Title>
 
