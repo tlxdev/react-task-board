@@ -129,3 +129,7 @@ strong {
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
   color: #CCC;
 }
+
+.task-column {
+  padding-left: 32px;
+}

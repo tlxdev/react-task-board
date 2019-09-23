@@ -22,8 +22,10 @@ form textarea.ant-input {
 
 .popover {
     position: fixed;
-    top: 20vh;
-    left: 25vw;
+    left: 50%;
+    margin-left: -432px;
+    top: 50%;
+    margin-top: -288px;
     background-color: #FFF;
     padding: 32px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
