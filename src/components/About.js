@@ -11,30 +11,27 @@ import { useSettings } from '../entities';
 
 const { Title } = Typography;
 
-// The about view
 export const About = () => {
   const [settings] = useSettings();
 
   return (
     <Layout className="full-height">
-      <SideNavigation selectedPage={'3'} />
-
+      <SideNavigation selectedPage="3" />
       <Layout
         type="flex"
         justify="center"
-        className={`full-height ${settings.darkMode ? 'dark' : ''}`}
-      >
+        className={classNames('full-height', { dark: settings?.darkMode })}>
         <Layout className="page-card">
           <Title level={2} className="settings-title">
             About
           </Title>
 
           <div className="text">
-            <p>Created by Taneli</p>{' '}
+            <p>Created by Taneli</p>
             <a href="https://github.com/tlxdev">https://github.com/tlxdev</a>
           </div>
         </Layout>
       </Layout>
     </Layout>
   );
-}
+};
