@@ -9,6 +9,8 @@ import './Settings.css';
 import { SideNavigation } from './SideNavigation';
 import { useSettings } from '../entities';
 
+import classNames from 'classnames';
+
 const { Title } = Typography;
 
 export const About = () => {

@@ -45,7 +45,7 @@
   flex-direction: row;
 }
 
-.App-title {
+.app-title {
   text-align: left;
   margin-left: 3px;
   font-size: 20px;
@@ -78,13 +78,6 @@
   overflow-y: scroll;
 }
 
-.dark-overlay {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.7);
-}
 
 .ant-menu-dark,
 .ant-layout-sider {
@@ -125,7 +118,7 @@ strong {
   color: #F5F5F5;
 }
 
-.App-title.dark, .dark .text, .dark .ant-card-meta-description,
+.app-title.dark, .dark .text, .dark .ant-card-meta-description,
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
   color: #CCC;
 }

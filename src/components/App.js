@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 const { Content } = Layout;
 
-const App = (props) => {
+const App = ({ blur }) => {
   const [settings] = useSettings();
 
   const [tasks, { moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
@@ -21,12 +21,12 @@ const App = (props) => {
   const navigate = useNavigate();
 
   const onClickMainDiv = () => {
-    if (props.blur) {
+    if (blur) {
       navigate('/');
     }
-  }
+  };
 
-  const onDragEnd = ({ destination, source }) => {
+  const onTaskDragEnd = ({ destination, source }) => {
     if (!destination || !source) {
       return;
     }
@@ -50,24 +50,23 @@ const App = (props) => {
     } else {
       moveTaskInSameColumn(source.droppableId, source.index, destination.index);
     }
-  }
+  };
 
   return (
     <>
       <div className="full-height" onClick={onClickMainDiv}>
-        {props.blur && <div className="dark-overlay"></div>}
         <Layout
           className={classNames('full-height', {
             dark: settings.darkmode,
-            blurred: props?.blur
+            blurred: blur
           })}>
           <SideNavigation selectedPage="1" />
 
           <Content className="scrollbar-fix">
             <div className="App full-height" justify="center">
-              <DragDropContext onDragEnd={onDragEnd}>
+              <DragDropContext onDragEnd={onTaskDragEnd}>
                 <Row type="flex" justify="center" className="full-height">
-                  {tasks.columns.map((column) => (
+                  {tasks?.columns?.map((column) => (
                     <Col
                       className="task-column"
                       xs={{ span: 24 }}
