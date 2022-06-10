@@ -52,10 +52,10 @@ function App(props) {
 
   return (
     <>
-      <div className={`fullheight`} onClick={clickMainDiv}>
+      <div className="full-height" onClick={clickMainDiv}>
         {props.blur && <div className="dark-overlay"></div>}
         <Layout
-          className={`fullheight ${settings.darkMode ? 'dark' : ''} ${props.blur ? 'blurred' : ''}`}
+          className={`full-height ${settings.darkMode ? 'dark' : ''} ${props.blur ? 'blurred' : ''}`}
         >
           <SideNavigation selectedPage={'1'} />
 

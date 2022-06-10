@@ -56,7 +56,7 @@
   -webkit-filter: blur(16px);
 }
 
-.fullheight {
+.full-height {
   height: 100%;
 }
 
@@ -117,7 +117,7 @@ strong {
   border: 1px solid #24292e;
 }
 
-.fullheight.dark {
+.full-height.dark {
   background-color: #323232;
 }
 

@@ -16,13 +16,13 @@ export const About = () => {
   const [settings] = useSettings();
 
   return (
-    <Layout className="fullheight">
+    <Layout className="full-height">
       <SideNavigation selectedPage={'3'} />
 
       <Layout
         type="flex"
         justify="center"
-        className={`fullheight ${settings.darkMode ? 'dark' : ''}`}
+        className={`full-height ${settings.darkMode ? 'dark' : ''}`}
       >
         <Layout className="page-card">
           <Title level={2} className="settings-title">

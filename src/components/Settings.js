@@ -10,6 +10,7 @@ import './App.css';
 import './Settings.css';
 import { SideNavigation } from './SideNavigation';
 import { DownloadOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
 
 const { Title } = Typography;
 
@@ -19,16 +20,16 @@ export const Settings = () => {
 
   const [settings, { setDarkMode }] = useSettings();
 
-  function clickExport() {
+  const onClickExport = () => {
     exportData(tasks);
-  }
+  };
 
-  function clickImport() {
+  const onClickImport = () => {
     getFileData().then((data) => {
       importData(data);
       showNotification();
     });
-  }
+  };
 
   const showNotification = () => {
     notification.open({
@@ -37,18 +38,18 @@ export const Settings = () => {
     });
   };
 
-  function changeDarkMode(checked) {
-    setDarkMode(checked);
-  }
+  const onChangeDarkMode = (newVal) => {
+    setDarkMode(newVal);
+  };
 
   return (
-    <Layout className="fullheight">
+    <Layout className="full-height">
       <SideNavigation selectedPage={'2'} />
 
       <Layout
         type="flex"
         justify="center"
-        className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
+        className={classNames('full-height', { dark: settings.darkMode })}>
         <Layout className="page-card">
           <Title level={2} className="settings-title">
             Settings
@@ -57,7 +58,7 @@ export const Settings = () => {
           <Row>
             <Switch
               className="settings-switch"
-              onChange={changeDarkMode}
+              onChange={onChangeDarkMode}
               checked={settings.darkMode}>
               Dark mode
             </Switch>
@@ -84,7 +85,7 @@ export const Settings = () => {
               icon={<DownloadOutlined />}
               size="default"
               className="settings-button"
-              onClick={clickImport}>
+              onClick={onClickImport}>
               Import data
             </Button>
             <Button
@@ -92,7 +93,7 @@ export const Settings = () => {
               icon={<DownloadOutlined />}
               size="default"
               className="settings-button"
-              onClick={clickExport}>
+              onClick={onClickExport}>
               Export data
             </Button>
           </Row>
