@@ -12,7 +12,7 @@ import { useSettings } from '../entities';
 const { Title } = Typography;
 
 // The about view
-export function About() {
+export const About = () => {
   const [settings] = useSettings();
 
   return (

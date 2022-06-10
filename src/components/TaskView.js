@@ -12,7 +12,7 @@ import './TaskView.css';
  * The view for /task/:id (popup) view
  * If id is 'new', doesn't save changes until "Save" button is pressed
  */
-export function TaskView() {
+export const TaskView = () => {
   const { id } = useParams();
 
   const [tasks, { setTask, addNewTask }] = useTasks();
@@ -93,4 +93,4 @@ export function TaskView() {
       </div>
     )
   );
-}
+};

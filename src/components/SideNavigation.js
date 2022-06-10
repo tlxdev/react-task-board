@@ -7,7 +7,7 @@ import { QuestionCircleOutlined, SettingOutlined, UserOutlined } from '@ant-desi
 
 const { Sider } = Layout;
 
-export function SideNavigation({ selectedPage }) {
+export const SideNavigation = ({ selectedPage }) => {
   return (
     <Sider trigger={null} collapsible collapsed={false}>
       <div className="logo" />
@@ -33,4 +33,4 @@ export function SideNavigation({ selectedPage }) {
       </Menu>
     </Sider>
   );
-}
+};

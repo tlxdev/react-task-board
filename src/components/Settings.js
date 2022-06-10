@@ -14,7 +14,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
 // The settings view
-export function Settings() {
+export const Settings = () => {
   const [tasks, { importData }] = useTasks();
 
   const [settings, { setDarkMode }] = useSettings();
@@ -48,8 +48,7 @@ export function Settings() {
       <Layout
         type="flex"
         justify="center"
-        className={`fullheight ${settings.darkMode ? 'dark' : ''}`}
-      >
+        className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
         <Layout className="page-card">
           <Title level={2} className="settings-title">
             Settings
@@ -59,8 +58,7 @@ export function Settings() {
             <Switch
               className="settings-switch"
               onChange={changeDarkMode}
-              checked={settings.darkMode}
-            >
+              checked={settings.darkMode}>
               Dark mode
             </Switch>
             <span className="settings-switch-text">Dark mode</span>
@@ -86,8 +84,7 @@ export function Settings() {
               icon={<DownloadOutlined />}
               size="default"
               className="settings-button"
-              onClick={clickImport}
-            >
+              onClick={clickImport}>
               Import data
             </Button>
             <Button
@@ -95,8 +92,7 @@ export function Settings() {
               icon={<DownloadOutlined />}
               size="default"
               className="settings-button"
-              onClick={clickExport}
-            >
+              onClick={clickExport}>
               Export data
             </Button>
           </Row>
@@ -104,4 +100,4 @@ export function Settings() {
       </Layout>
     </Layout>
   );
-}
+};
