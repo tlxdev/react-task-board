@@ -8,27 +8,29 @@ import { QuestionCircleOutlined, SettingOutlined, UserOutlined } from '@ant-desi
 const { Sider } = Layout;
 
 export function SideNavigation({ selectedPage }) {
-    return (<Sider trigger={null} collapsible collapsed={false}>
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedPage]}>
-            <Menu.Item key="1">
-                <Link to="/">
-                    <UserOutlined />
-                    <span>Task board</span>
-                </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-                <Link to="/settings">
-                    <SettingOutlined />
-                    <span>Settings</span>
-                </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-                <Link to="/about">
-                    <QuestionCircleOutlined />
-                    <span>About</span>
-                </Link>
-            </Menu.Item>
-        </Menu>
-    </Sider>);
+  return (
+    <Sider trigger={null} collapsible collapsed={false}>
+      <div className="logo" />
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedPage]}>
+        <Menu.Item key="1">
+          <Link to="/">
+            <UserOutlined />
+            <span>Task board</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <Link to="/settings">
+            <SettingOutlined />
+            <span>Settings</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="3">
+          <Link to="/about">
+            <QuestionCircleOutlined />
+            <span>About</span>
+          </Link>
+        </Menu.Item>
+      </Menu>
+    </Sider>
+  );
 }

@@ -9,35 +9,35 @@ import { useTasks, useSettings } from '../entities';
 
 import './App.css';
 
-
 function DraggableTaskCard({ data }) {
+  const [tasks] = useTasks();
 
+  const [state, setState] = useState({});
 
-    const [tasks] = useTasks();
+  const [settings] = useSettings();
 
-    const [state, setState] = useState({});
+  useEffect(() => {
+    setState({ ...tasks.tasks.find((taskIter) => taskIter.id === data) });
+  }, [tasks, data]);
 
-    const [settings] = useSettings();
-
-
-    useEffect(() => {
-        setState({ ...tasks.tasks.find(taskIter => taskIter.id === data) });
-    }, [tasks, data]);
-
-    return (<div>
-        <Link to={`/task/${state.id}`}>
-            <Card style={{ width: 300, textAlign: "left" }} className={`${settings.darkMode ? 'dark' : ''}`}>
-                <div>
-                    <Meta
-                        className={`${settings.darkMode ? 'dark' : ''}`}
-                        title={`#${state.id} ${state.title}`}
-                        description={<ReactMarkdown source={state.text} />}
-                    />
-
-                </div>
-            </Card>
-        </Link>
-    </div >);
+  return (
+    <div>
+      <Link to={`/task/${state.id}`}>
+        <Card
+          style={{ width: 300, textAlign: 'left' }}
+          className={`${settings.darkMode ? 'dark' : ''}`}
+        >
+          <div>
+            <Meta
+              className={`${settings.darkMode ? 'dark' : ''}`}
+              title={`#${state.id} ${state.title}`}
+              description={<ReactMarkdown source={state.text} />}
+            />
+          </div>
+        </Card>
+      </Link>
+    </div>
+  );
 }
 
 export default DraggableTaskCard;

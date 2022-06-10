@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./components/App";
-import { TaskView } from "./components/TaskView";
-import { useTasks, useSettings } from "./entities";
-import { Settings } from "./components/Settings";
-import { About } from "./components/About";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './components/App';
+import { TaskView } from './components/TaskView';
+import { useTasks, useSettings } from './entities';
+import { Settings } from './components/Settings';
+import { About } from './components/About';
 
 function Router() {
-  const [tasks, { loadTasksFromLocalStorage, saveTasksToLocalStorage }] =
-    useTasks();
-  const [
-    settings,
-    { loadSettingsFromLocalStorage, saveSettingsToLocalStorage },
-  ] = useSettings();
+  const [tasks, { loadTasksFromLocalStorage, saveTasksToLocalStorage }] = useTasks();
+  const [settings, { loadSettingsFromLocalStorage, saveSettingsToLocalStorage }] = useSettings();
 
   // Automatically both loads data from local storage on startup,
   // And saves data changes to local storage

@@ -13,21 +13,28 @@ const { Title } = Typography;
 
 // The about view
 export function About() {
+  const [settings] = useSettings();
 
-    const [settings] = useSettings();
+  return (
+    <Layout className="fullheight">
+      <SideNavigation selectedPage={'3'} />
 
-    return (<Layout className="fullheight">
-        <SideNavigation selectedPage={'3'} />
+      <Layout
+        type="flex"
+        justify="center"
+        className={`fullheight ${settings.darkMode ? 'dark' : ''}`}
+      >
+        <Layout className="page-card">
+          <Title level={2} className="settings-title">
+            About
+          </Title>
 
-        <Layout type="flex" justify="center" className={`fullheight ${settings.darkMode ? 'dark' : ''}`}>
-            <Layout className="page-card">
-
-                <Title level={2} className="settings-title">About</Title>
-
-                <div className="text"><p>Created by Taneli</p> <a href="https://github.com/tlxdev">https://github.com/tlxdev</a></div>
-
-
-            </Layout>
+          <div className="text">
+            <p>Created by Taneli</p>{' '}
+            <a href="https://github.com/tlxdev">https://github.com/tlxdev</a>
+          </div>
         </Layout>
-    </Layout>);
+      </Layout>
+    </Layout>
+  );
 }

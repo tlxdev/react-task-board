@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Button, Row, Col } from "antd";
-import { Link, useParams } from "react-router-dom";
-import TextArea from "antd/lib/input/TextArea";
-import ReactMarkdown from "react-markdown";
+import React, { useState, useEffect } from 'react';
+import { Button, Row, Col } from 'antd';
+import { Link, useParams } from 'react-router-dom';
+import TextArea from 'antd/lib/input/TextArea';
+import ReactMarkdown from 'react-markdown';
 
-import { useTasks, useSettings } from "../entities";
+import { useTasks, useSettings } from '../entities';
 
-import "./TaskView.css";
+import './TaskView.css';
 
 /**
  * The view for /task/:id (popup) view
@@ -17,7 +17,7 @@ export function TaskView() {
 
   const [tasks, { setTask, addNewTask }] = useTasks();
 
-  const [state, setState] = useState({ title: "", text: "" });
+  const [state, setState] = useState({ title: '', text: '' });
 
   const [isNew, setIsNew] = useState(false);
 
@@ -25,9 +25,7 @@ export function TaskView() {
 
   useEffect(() => {
     if (id) {
-      const taskForId = tasks.tasks.find(
-        (taskIter) => taskIter.id === Number(id)
-      );
+      const taskForId = tasks.tasks.find((taskIter) => taskIter.id === Number(id));
       if (taskForId) {
         setState(taskForId);
       }
@@ -61,7 +59,7 @@ export function TaskView() {
 
   return (
     state && (
-      <div className={`popover ${settings.darkMode ? "dark" : ""}`}>
+      <div className={`popover ${settings.darkMode ? 'dark' : ''}`}>
         <Row className="centered">
           <div className="task-form">
             <input
@@ -82,20 +80,11 @@ export function TaskView() {
             </Col>
 
             <Col span={11} style={{ marginLeft: 16 }}>
-              <ReactMarkdown
-                className="markdown"
-                source={state.text}
-                linkTarget={"_blank"}
-              />
+              <ReactMarkdown className="markdown" source={state.text} linkTarget={'_blank'} />
             </Col>
 
             <Link to="/">
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="task-form-button"
-                onClick={save}
-              >
+              <Button type="primary" htmlType="submit" className="task-form-button" onClick={save}>
                 Save
               </Button>
             </Link>

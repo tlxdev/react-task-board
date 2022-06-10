@@ -1,12 +1,9 @@
 export const initialState = {
-    tasks: {}
+  tasks: {}
 };
 
+export const setTaskPreviousColumns = (counter) => (task) => {
+  const tasksClone = { ...counter.state.tasks, [task.id]: task };
 
-export const setTaskPreviousColumns = (counter) => task => {
-
-    const tasksClone = {...counter.state.tasks, [task.id]: task};
-
-    counter.setState({ ...counter.state, tasks: tasksClone })
-
-}
+  counter.setState({ ...counter.state, tasks: tasksClone });
+};
