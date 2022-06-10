@@ -4,10 +4,10 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TaskList from './TaskList';
 import { Col, Row, Layout, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
-import { withRouter } from "react-router-dom";
 import { useTasks, useSettings } from '../entities';
-import { Link } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { SideNavigation } from './SideNavigation';
+import { PlusOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
 
@@ -21,9 +21,11 @@ function App(props) {
 
   const [tasks, { moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
 
+  const navigate = useNavigate();
+
   function clickMainDiv() {
     if (props.blur) {
-      props.history.push('/')
+      navigate('/');
     }
   }
 
@@ -44,55 +46,58 @@ function App(props) {
   }
 
   return (
-    <div className={`fullheight`} onClick={clickMainDiv} >
-      {props.blur && <div className='dark-overlay'></div>}
-      <Layout className={`fullheight ${settings.darkMode ? 'dark' : ''} ${props.blur ? 'blurred' : ''}`}>
+    <>
+      <div className={`fullheight`} onClick={clickMainDiv} >
+        {props.blur && <div className='dark-overlay'></div>}
+        <Layout className={`fullheight ${settings.darkMode ? 'dark' : ''} ${props.blur ? 'blurred' : ''}`}>
 
-        <SideNavigation selectedPage={'1'} />
+          <SideNavigation selectedPage={'1'} />
 
-        <Content className="scrollbar-fix">
+          <Content className="scrollbar-fix">
 
-          <div className="App full-height" justify="center">
-            <DragDropContext onDragEnd={onDragEnd}>
+            <div className="App full-height" justify="center">
+              <DragDropContext onDragEnd={onDragEnd}>
 
-              <Row type="flex" justify="center" className="full-height">
+                <Row type="flex" justify="center" className="full-height">
 
-                {tasks.columns.map(column => (
-                  <Col className="task-column" xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 8 }} xxl={{ span: 5 }} key={"task-column-" + column.name}>
+                  {tasks.columns.map(column => (
+                    <Col className="task-column" xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} xl={{ span: 8 }} xxl={{ span: 5 }} key={"task-column-" + column.name}>
 
-                    <Row type="flex">
-                      <Title className={`App-title ${settings.darkMode ? 'dark' : ''}`} level={4}>{column.name} ({column.tasks.length})</Title>
-                      {column.canAddTask &&
-                        <Link to="/task/new">
-                          <Button className="add-task-button" icon="plus" type="link" size={"default"}>
-                            Add
-                        </Button>
-                        </Link>
-                      }
-                    </Row>
+                      <Row type="flex">
+                        <Title className={`App-title ${settings.darkMode ? 'dark' : ''}`} level={4}>{column.name} ({column.tasks.length})</Title>
+                        {column.canAddTask &&
+                          <Link to="/task/new">
+                            <Button className="add-task-button" type="link" size={"default"} icon={<PlusOutlined />}>
+                              Add
+                          </Button>
+                          </Link>
+                        }
+                      </Row>
 
-                    <Droppable droppableId={column.name} isCombineEnabled={false}>
-                      {provided => (
-                        <div ref={provided.innerRef} {...provided.droppableProps} className="full-height">
-                          <TaskList tasks={column.tasks} name={column.name}>
-                          </TaskList>
-                          <div className="row-placeholder"> {provided.placeholder} </div>
-                        </div>
-                      )}
-                    </Droppable>
+                      <Droppable droppableId={column.name} isCombineEnabled={false}>
+                        {provided => (
+                          <div ref={provided.innerRef} {...provided.droppableProps} className="full-height">
+                            <TaskList tasks={column.tasks} name={column.name}>
+                            </TaskList>
+                            <div className="row-placeholder"> {provided.placeholder} </div>
+                          </div>
+                        )}
+                      </Droppable>
 
-                  </Col>
-                ))}
-              </Row>
+                    </Col>
+                  ))}
+                </Row>
 
-            </DragDropContext>
-          </div>
+              </DragDropContext>
+            </div>
 
-        </Content>
-      </Layout>
-    </div >
+          </Content>
+        </Layout>
+      </div >
+      <Outlet />
+    </>
 
   );
 }
 
-export default withRouter(App);
+export default App;

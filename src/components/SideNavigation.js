@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Layout, Menu, Icon } from 'antd';
-import { Link } from 'react-router-dom'
+import { Layout, Menu } from 'antd';
+import { Link } from 'react-router-dom';
+
+import { QuestionCircleOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 
 const { Sider } = Layout;
 
@@ -11,19 +13,19 @@ export function SideNavigation({ selectedPage }) {
         <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedPage]}>
             <Menu.Item key="1">
                 <Link to="/">
-                    <Icon type="user" />
+                    <UserOutlined />
                     <span>Task board</span>
                 </Link>
             </Menu.Item>
             <Menu.Item key="2">
                 <Link to="/settings">
-                    <Icon type="setting" />
+                    <SettingOutlined />
                     <span>Settings</span>
                 </Link>
             </Menu.Item>
             <Menu.Item key="3">
                 <Link to="/about">
-                    <Icon type="question-circle" />
+                    <QuestionCircleOutlined />
                     <span>About</span>
                 </Link>
             </Menu.Item>

@@ -9,6 +9,7 @@ import { Typography } from 'antd';
 import './App.css';
 import './Settings.css';
 import { SideNavigation } from './SideNavigation';
+import { DownloadOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -70,10 +71,10 @@ export function Settings() {
                 </Row>
 
                 <Row>
-                    <Button type="normal" icon="download" size="default" className="settings-button" onClick={clickImport}>
+                    <Button type="normal" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={clickImport}>
                         Import data
                     </Button>
-                    <Button type="primary" icon="download" size="default" className="settings-button" onClick={clickExport}>
+                    <Button type="primary" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={clickExport}>
                         Export data
                 </Button>
                 </Row>

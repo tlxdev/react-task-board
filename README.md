@@ -1,4 +1,4 @@
-Demo at <a href="https://tanlah.github.io/react-task-board/" target="_blank">https://tanlah.github.io/react-task-board/</a>
+Demo at <a href="https://tlxdev.github.io/react-task-board/" target="_blank">https://tlxdev.github.io/react-task-board/</a>
 
 ## About
 A simple task board currently intended for single-user personal projects.  
