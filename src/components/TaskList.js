@@ -24,12 +24,7 @@ const TaskList = ({ tasks, name }) => {
         for (const columnTask of column.tasks) {
           // Show animation if the card has been moved to column that has 'showConfetti' attribute
           const taskData = taskPreviousColumns.tasks[columnTask];
-          if (
-            taskData &&
-            column.name &&
-            taskData.previousColumn !== column.name &&
-            column.showConfetti
-          ) {
+          if (taskData && column.name && taskData.previousColumn !== column.name && column.showConfetti) {
             const data = { [columnTask]: true };
             setShowAnim(data);
             setTimeout(() => setShowAnim({}), 300);
@@ -44,16 +39,9 @@ const TaskList = ({ tasks, name }) => {
 
   return tasks
     ? tasks.map((task, index) => (
-        <Draggable
-          key={'task-list-draggable-' + index}
-          draggableId={name + index.toString()}
-          index={index}>
+        <Draggable key={'task-list-draggable-' + index} draggableId={name + index.toString()} index={index}>
           {(provided) => (
-            <div
-              className="task-card"
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}>
+            <div className="task-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <Confetti className="confetti" active={showAnim[task]}></Confetti>
 
               <DraggableTaskCard data={task}></DraggableTaskCard>

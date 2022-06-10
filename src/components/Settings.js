@@ -46,20 +46,14 @@ export const Settings = () => {
     <Layout className="full-height">
       <SideNavigation selectedPage={'2'} />
 
-      <Layout
-        type="flex"
-        justify="center"
-        className={classNames('full-height', { dark: settings.darkMode })}>
+      <Layout type="flex" justify="center" className={classNames('full-height', { dark: settings.darkMode })}>
         <Layout className="page-card">
           <Title level={2} className="settings-title">
             Settings
           </Title>
 
           <Row>
-            <Switch
-              className="settings-switch"
-              onChange={onChangeDarkMode}
-              checked={settings.darkMode}>
+            <Switch className="settings-switch" onChange={onChangeDarkMode} checked={settings.darkMode}>
               Dark mode
             </Switch>
             <span className="settings-switch-text">Dark mode</span>
@@ -80,20 +74,10 @@ export const Settings = () => {
           </Row>
 
           <Row>
-            <Button
-              type="normal"
-              icon={<DownloadOutlined />}
-              size="default"
-              className="settings-button"
-              onClick={onClickImport}>
+            <Button type="normal" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={onClickImport}>
               Import data
             </Button>
-            <Button
-              type="primary"
-              icon={<DownloadOutlined />}
-              size="default"
-              className="settings-button"
-              onClick={onClickExport}>
+            <Button type="primary" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={onClickExport}>
               Export data
             </Button>
           </Row>

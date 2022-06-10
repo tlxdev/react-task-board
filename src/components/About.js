@@ -19,10 +19,7 @@ export const About = () => {
   return (
     <Layout className="full-height">
       <SideNavigation selectedPage="3" />
-      <Layout
-        type="flex"
-        justify="center"
-        className={classNames('full-height', { dark: settings?.darkMode })}>
+      <Layout type="flex" justify="center" className={classNames('full-height', { dark: settings?.darkMode })}>
         <Layout className="page-card">
           <Title level={2} className="settings-title">
             About

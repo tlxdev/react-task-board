@@ -23,9 +23,7 @@ const DraggableTaskCard = ({ data }) => {
   return (
     <div>
       <Link to={`/task/${state.id}`}>
-        <Card
-          style={{ width: 300, textAlign: 'left' }}
-          className={`${settings.darkMode ? 'dark' : ''}`}>
+        <Card style={{ width: 300, textAlign: 'left' }} className={`${settings.darkMode ? 'dark' : ''}`}>
           <div>
             <Meta
               className={`${settings.darkMode ? 'dark' : ''}`}

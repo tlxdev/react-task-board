@@ -18,42 +18,38 @@ export const setTask = (tasksStore) => (task) => {
   tasksStore.setState({ ...tasksStore.state, tasks: tasksClone });
 };
 
-export const moveTaskBetweenColumns =
-  (tasksStore) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
-    // Find the task id for for given column and index
-    const targetTaskId = tasksStore.state.columns.find(
-      (columnIter) => columnIter.name === sourceColumnName
-    ).tasks[sourceTaskIndex];
+export const moveTaskBetweenColumns = (tasksStore) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
+  // Find the task id for for given column and index
+  const targetTaskId = tasksStore.state.columns.find((columnIter) => columnIter.name === sourceColumnName).tasks[sourceTaskIndex];
 
-    // For each column
-    const newArrayData = [...tasksStore.state.columns].map((column) => {
-      // Remove the task from old column
-      if (column.name === sourceColumnName) {
-        column.tasks = column.tasks.filter((task) => task !== targetTaskId);
-      }
-      // Insert it into new column
-      if (column.name === targetColumnName) {
-        column.tasks.splice(targetTaskIndex, 0, targetTaskId);
-      }
+  // For each column
+  const newArrayData = [...tasksStore.state.columns].map((column) => {
+    // Remove the task from old column
+    if (column.name === sourceColumnName) {
+      column.tasks = column.tasks.filter((task) => task !== targetTaskId);
+    }
+    // Insert it into new column
+    if (column.name === targetColumnName) {
+      column.tasks.splice(targetTaskIndex, 0, targetTaskId);
+    }
 
-      return column;
-    });
+    return column;
+  });
 
-    tasksStore.setState({ ...tasksStore.state, columns: newArrayData });
-  };
+  tasksStore.setState({ ...tasksStore.state, columns: newArrayData });
+};
 
-export const moveTaskInSameColumn =
-  (tasksStore) => (columnName, sourceTaskIndex, targetTaskIndex) => {
-    const columnsCopy = [...tasksStore.state.columns];
+export const moveTaskInSameColumn = (tasksStore) => (columnName, sourceTaskIndex, targetTaskIndex) => {
+  const columnsCopy = [...tasksStore.state.columns];
 
-    // Find the column to perform move in
-    let targetColumn = columnsCopy.find((columnIter) => columnIter.name === columnName);
+  // Find the column to perform move in
+  let targetColumn = columnsCopy.find((columnIter) => columnIter.name === columnName);
 
-    // Move the task from that columns source location to target location
-    targetColumn.tasks = arrayMove(targetColumn.tasks, sourceTaskIndex, targetTaskIndex);
+  // Move the task from that columns source location to target location
+  targetColumn.tasks = arrayMove(targetColumn.tasks, sourceTaskIndex, targetTaskIndex);
 
-    tasksStore.setState({ ...tasksStore.state, columns: columnsCopy });
-  };
+  tasksStore.setState({ ...tasksStore.state, columns: columnsCopy });
+};
 
 export const addNewTask = (tasksStore) => (task) => {
   const columnsWithNewTask = [...tasksStore.state.columns];
