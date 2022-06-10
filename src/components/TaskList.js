@@ -8,7 +8,7 @@ import { useTaskPreviousColumns, useTasks } from '../entities';
 
 // The task list view for a column
 // Contains all the cards for the column
-function TaskList({ tasks, name }) {
+const TaskList = ({ tasks, name }) => {
   const [showAnim, setShowAnim] = useState({});
 
   const [tasksData] = useTasks();
@@ -47,15 +47,13 @@ function TaskList({ tasks, name }) {
         <Draggable
           key={'task-list-draggable-' + index}
           draggableId={name + index.toString()}
-          index={index}
-        >
+          index={index}>
           {(provided) => (
             <div
               className="Task-card"
               ref={provided.innerRef}
               {...provided.draggableProps}
-              {...provided.dragHandleProps}
-            >
+              {...provided.dragHandleProps}>
               <Confetti className="confetti" active={showAnim[task]}></Confetti>
 
               <DraggableTaskCard data={task}></DraggableTaskCard>
@@ -64,6 +62,6 @@ function TaskList({ tasks, name }) {
         </Draggable>
       ))
     : '';
-}
+};
 
 export default TaskList;

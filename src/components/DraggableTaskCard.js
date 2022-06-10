@@ -9,7 +9,7 @@ import { useTasks, useSettings } from '../entities';
 
 import './App.css';
 
-function DraggableTaskCard({ data }) {
+const DraggableTaskCard = ({ data }) => {
   const [tasks] = useTasks();
 
   const [state, setState] = useState({});
@@ -25,8 +25,7 @@ function DraggableTaskCard({ data }) {
       <Link to={`/task/${state.id}`}>
         <Card
           style={{ width: 300, textAlign: 'left' }}
-          className={`${settings.darkMode ? 'dark' : ''}`}
-        >
+          className={`${settings.darkMode ? 'dark' : ''}`}>
           <div>
             <Meta
               className={`${settings.darkMode ? 'dark' : ''}`}
@@ -38,6 +37,6 @@ function DraggableTaskCard({ data }) {
       </Link>
     </div>
   );
-}
+};
 
 export default DraggableTaskCard;

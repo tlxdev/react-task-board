@@ -9,22 +9,24 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { SideNavigation } from './SideNavigation';
 import { PlusOutlined } from '@ant-design/icons';
 
+import classNames from 'classnames';
+
 const { Content } = Layout;
 
-function App(props) {
+const App = (props) => {
   const [settings] = useSettings();
 
   const [tasks, { moveTaskBetweenColumns, moveTaskInSameColumn }] = useTasks();
 
   const navigate = useNavigate();
 
-  function clickMainDiv() {
+  const onClickMainDiv = () => {
     if (props.blur) {
       navigate('/');
     }
   }
 
-  function onDragEnd({ destination, source }) {
+  const onDragEnd = ({ destination, source }) => {
     if (!destination || !source) {
       return;
     }
@@ -52,12 +54,14 @@ function App(props) {
 
   return (
     <>
-      <div className="full-height" onClick={clickMainDiv}>
+      <div className="full-height" onClick={onClickMainDiv}>
         {props.blur && <div className="dark-overlay"></div>}
         <Layout
-          className={`full-height ${settings.darkMode ? 'dark' : ''} ${props.blur ? 'blurred' : ''}`}
-        >
-          <SideNavigation selectedPage={'1'} />
+          className={classNames('full-height', {
+            dark: settings.darkmode,
+            blurred: props?.blur
+          })}>
+          <SideNavigation selectedPage="1" />
 
           <Content className="scrollbar-fix">
             <div className="App full-height" justify="center">
@@ -71,8 +75,7 @@ function App(props) {
                       lg={{ span: 12 }}
                       xl={{ span: 8 }}
                       xxl={{ span: 5 }}
-                      key={'task-column-' + column.name}
-                    >
+                      key={'task-column-' + column.name}>
                       <Row type="flex">
                         <Title className={`App-title ${settings.darkMode ? 'dark' : ''}`} level={4}>
                           {column.name} ({column.tasks.length})
@@ -83,8 +86,7 @@ function App(props) {
                               className="add-task-button"
                               type="link"
                               size={'default'}
-                              icon={<PlusOutlined />}
-                            >
+                              icon={<PlusOutlined />}>
                               Add
                             </Button>
                           </Link>
@@ -96,8 +98,7 @@ function App(props) {
                           <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}
-                            className="full-height"
-                          >
+                            className="full-height">
                             <TaskList tasks={column.tasks} name={column.name}></TaskList>
                             <div className="row-placeholder"> {provided.placeholder} </div>
                           </div>
@@ -114,6 +115,6 @@ function App(props) {
       <Outlet />
     </>
   );
-}
+};
 
 export default App;

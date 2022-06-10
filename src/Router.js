@@ -6,7 +6,7 @@ import { useTasks, useSettings } from './entities';
 import { Settings } from './components/Settings';
 import { About } from './components/About';
 
-function Router() {
+const Router = () => {
   const [tasks, { loadTasksFromLocalStorage, saveTasksToLocalStorage }] = useTasks();
   const [settings, { loadSettingsFromLocalStorage, saveSettingsToLocalStorage }] = useSettings();
 
