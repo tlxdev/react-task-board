@@ -20,7 +20,7 @@ Some examples about possibilities are images
 ![Images](https://icon-library.net/images/react-icon/react-icon-13.jpg)
 
 or links
-https://www.github.com/tanlah`},
+https://www.github.com/tlxdev`},
     {
         id: 3,
         title: 'Visit the application',

@@ -24,7 +24,7 @@ export function About() {
 
                 <Title level={2} className="settings-title">About</Title>
 
-                <div className="text"><p>Created by Taneli</p> <a href="https://github.com/tanlah">https://github.com/tanlah</a></div>
+                <div className="text"><p>Created by Taneli</p> <a href="https://github.com/tlxdev">https://github.com/tlxdev</a></div>
 
 
             </Layout>
