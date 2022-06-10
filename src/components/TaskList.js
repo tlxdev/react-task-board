@@ -50,7 +50,7 @@ const TaskList = ({ tasks, name }) => {
           index={index}>
           {(provided) => (
             <div
-              className="Task-card"
+              className="task-card"
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}>

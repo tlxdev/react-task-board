@@ -63,7 +63,7 @@ const App = ({ blur }) => {
           <SideNavigation selectedPage="1" />
 
           <Content className="scrollbar-fix">
-            <div className="App full-height" justify="center">
+            <div className="app full-height" justify="center">
               <DragDropContext onDragEnd={onTaskDragEnd}>
                 <Row type="flex" justify="center" className="full-height">
                   {tasks?.columns?.map((column) => (
@@ -76,7 +76,7 @@ const App = ({ blur }) => {
                       xxl={{ span: 5 }}
                       key={'task-column-' + column.name}>
                       <Row type="flex">
-                        <Title className={`App-title ${settings.darkMode ? 'dark' : ''}`} level={4}>
+                        <Title className={`app-title ${settings.darkMode ? 'dark' : ''}`} level={4}>
                           {column.name} ({column.tasks.length})
                         </Title>
                         {column.canAddTask && (
