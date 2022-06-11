@@ -69,7 +69,7 @@ const App = ({ blur }) => {
                     >
                       <Row type="flex">
                         <Title className={`app-title ${settings.darkMode ? 'dark' : ''}`} level={4}>
-                          {column.name} ({column.tasks.length})
+                          {column.name} ({column.tasks?.length || 0})
                         </Title>
                         {column.canAddTask && (
                           <Link to="/task/new">
@@ -83,7 +83,7 @@ const App = ({ blur }) => {
                       <Droppable droppableId={column.name} isCombineEnabled={false}>
                         {(provided) => (
                           <div ref={provided.innerRef} {...provided.droppableProps} className="full-height">
-                            <TaskList tasks={column.tasks} name={column.name}></TaskList>
+                            <TaskList tasks={column?.tasks} name={column.name}></TaskList>
                             <div className="row-placeholder"> {provided.placeholder} </div>
                           </div>
                         )}
