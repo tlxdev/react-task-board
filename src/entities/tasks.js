@@ -62,17 +62,23 @@ export const moveTaskInSameColumn = (tasksStore) => (columnName, sourceTaskIndex
 };
 
 export const addNewTask = (tasksStore) => (task) => {
-  const columnsWithNewTask = [...tasksStore.state.columns];
-  const tasksWithNewTask = [...tasksStore.state.tasks];
-
+  const oldTaskCount = tasksStore.state.tasks.length;
   // Create new task object, id made by auto incrementing
-  const newTask = { id: tasksWithNewTask.length + 1, ...task };
+  const newTask = { ...task, id: oldTaskCount + 1 };
 
-  // Add it into the tasks array
-  tasksWithNewTask.push(newTask);
+  const tasksWithNewTask = [...tasksStore.state.tasks, newTask];
 
-  // Add the new task into the first column(hardcoded for now)
-  columnsWithNewTask[0].tasks.push(newTask.id);
+  const columnsWithNewTask = tasksStore.state.columns.map((column, index) => {
+    if (index === 0) {
+      return {
+        ...column,
+        tasks: [...column.tasks, newTask.id]
+      };
+    }
+    return column;
+  });
+
+  console.log(tasksWithNewTask);
 
   tasksStore.setState({
     ...tasksStore.state,

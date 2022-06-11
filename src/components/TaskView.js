@@ -15,11 +15,11 @@ import './TaskView.css';
 export const TaskView = () => {
   const { id } = useParams();
 
+  const isNew = id === 'new';
+
   const [tasks, { setTask, addNewTask }] = useTasks();
 
   const [state, setState] = useState({ title: '', text: '' });
-
-  const [isNew, setIsNew] = useState(false);
 
   const [settings] = useSettings();
 
@@ -29,8 +29,6 @@ export const TaskView = () => {
       if (taskForId) {
         setState(taskForId);
       }
-    } else {
-      setIsNew(true);
     }
   }, []);
 
