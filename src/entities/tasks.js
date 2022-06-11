@@ -8,15 +8,18 @@ export const initialState = {
 };
 
 export const setTask = (tasksStore) => (task) => {
-  // Find the tasks index in tasks array
-  const forId = tasksStore.state.tasks.findIndex((taskIter) => taskIter.id === task.id);
-
   // Replace the object located in that index with given param
-  const tasksClone = [...tasksStore.state.tasks];
-  tasksClone[forId] = task;
+  const tasksClone = [...tasksStore.state.tasks].map((originalTask) => {
+    if (originalTask.id === task.id) {
+      return task;
+    }
+    return originalTask;
+  });
 
   tasksStore.setState({ ...tasksStore.state, tasks: tasksClone });
 };
+
+const insertToArrayWithoutMutate = (array, index, item) => [...array.slice(0, index), item, ...array.slice(index)];
 
 export const moveTaskBetweenColumns = (tasksStore) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
   // Find the task id for for given column and index
@@ -26,11 +29,17 @@ export const moveTaskBetweenColumns = (tasksStore) => (sourceColumnName, targetC
   const newArrayData = [...tasksStore.state.columns].map((column) => {
     // Remove the task from old column
     if (column.name === sourceColumnName) {
-      column.tasks = column.tasks.filter((task) => task !== targetTaskId);
+      return {
+        ...column,
+        tasks: [...column.tasks].filter((task) => task !== targetTaskId)
+      };
     }
     // Insert it into new column
     if (column.name === targetColumnName) {
-      column.tasks.splice(targetTaskIndex, 0, targetTaskId);
+      return {
+        ...column,
+        tasks: insertToArrayWithoutMutate([...column.tasks], targetTaskIndex, targetTaskId)
+      };
     }
 
     return column;
