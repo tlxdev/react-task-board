@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import { useTasks, useSettings } from '../entities';
 
 import './TaskView.css';
+import classNames from 'classnames';
 
 /**
  * The view for /task/:id (popup) view
@@ -37,7 +38,7 @@ export const TaskView = () => {
     if (!isNew) {
       setTask(state);
     }
-  }, [state, setTask, isNew]);
+  }, [state]);
 
   // When user types into the "title" field, update state
   const setTitle = (title) => {
@@ -49,7 +50,7 @@ export const TaskView = () => {
     setState({ ...state, text });
   };
 
-  const save = () => {
+  const onSave = () => {
     if (isNew) {
       addNewTask(state);
     }
@@ -57,7 +58,7 @@ export const TaskView = () => {
 
   return (
     state && (
-      <div className={`popover ${settings.darkMode ? 'dark' : ''}`}>
+      <div className={classNames('popover', { dark: settings.darkMode })}>
         <Row className="centered">
           <div className="task-form">
             <input
@@ -82,7 +83,7 @@ export const TaskView = () => {
             </Col>
 
             <Link to="/">
-              <Button type="primary" htmlType="submit" className="task-form-button" onClick={save}>
+              <Button type="primary" htmlType="submit" className="task-form-button" onClick={onSave}>
                 Save
               </Button>
             </Link>
