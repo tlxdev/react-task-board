@@ -1,6 +1,5 @@
+import { arrayMoveImmutable } from 'array-move';
 import { saveState, loadState } from '../utils/localstorage';
-
-const arrayMove = require('array-move');
 
 export const initialState = {
   columns: [],
@@ -49,15 +48,17 @@ export const moveTaskBetweenColumns = (tasksStore) => (sourceColumnName, targetC
 };
 
 export const moveTaskInSameColumn = (tasksStore) => (columnName, sourceTaskIndex, targetTaskIndex) => {
-  const columnsCopy = [...tasksStore.state.columns];
+  const columns = tasksStore.state.columns.map((column) => {
+    if (column?.name === columnName) {
+      return {
+        ...column,
+        tasks: arrayMoveImmutable(column.tasks, sourceTaskIndex, targetTaskIndex)
+      };
+    }
+    return column;
+  });
 
-  // Find the column to perform move in
-  let targetColumn = columnsCopy.find((columnIter) => columnIter.name === columnName);
-
-  // Move the task from that columns source location to target location
-  targetColumn.tasks = arrayMove(targetColumn.tasks, sourceTaskIndex, targetTaskIndex);
-
-  tasksStore.setState({ ...tasksStore.state, columns: columnsCopy });
+  tasksStore.setState({ ...tasksStore.state, columns });
 };
 
 export const addNewTask = (tasksStore) => (task) => {
