@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ const DraggableTaskCard = React.memo(({ id }) => {
     <Link to={`/task/${task.id}`}>
       <Card className={classNames('task-card', { dark: settings.darkMode })}>
         <Meta
-          className={`${settings.darkMode ? 'dark' : ''}`}
+          className={classNames({ dark: settings.darkMode })}
           title={`#${task.id} ${task.title}`}
           description={<ReactMarkdown source={task.text} />}
         />

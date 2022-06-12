@@ -38,6 +38,7 @@ form textarea.ant-input {
     font-size: 25px;
     height: 48px;
     color: rgba(0, 0, 0, 0.85);
+    border: none;
 }
 
 .title-input::placeholder {

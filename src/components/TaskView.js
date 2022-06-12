@@ -9,6 +9,11 @@ import { useTasks, useSettings } from '../entities';
 import './TaskView.css';
 import classNames from 'classnames';
 
+const EMPTY_TASK = {
+  title: '',
+  text: ''
+};
+
 /**
  * The view for /task/:id (popup) view
  * If id is 'new', doesn't save changes until "Save" button is pressed
@@ -20,67 +25,62 @@ export const TaskView = () => {
 
   const [tasks, { setTask, addNewTask }] = useTasks();
 
-  const [state, setState] = useState({ title: '', text: '' });
+  const getInitialTaskState = () => {
+    if (isNew) {
+      return EMPTY_TASK;
+    }
+    return tasks.tasks.find((taskIter) => taskIter.id === Number(id)) || EMPTY_TASK;
+  };
+
+  const [selectedTask, setSelectedTask] = useState(getInitialTaskState());
 
   const [settings] = useSettings();
 
-  useEffect(() => {
-    if (id) {
-      const taskForId = tasks.tasks.find((taskIter) => taskIter.id === Number(id));
-      if (taskForId) {
-        setState(taskForId);
-      }
-    }
-  }, []);
-
-  // On local state change, update the store state
-  useEffect(() => {
-    if (!isNew) {
-      setTask(state);
-    }
-  }, [state]);
-
   // When user types into the "title" field, update state
   const setTitle = (title) => {
-    setState({ ...state, title });
+    setSelectedTask({ ...selectedTask, title });
   };
 
   // When user types into the "text" field, update state
   const setText = (text) => {
-    setState({ ...state, text });
+    setSelectedTask({ ...selectedTask, text });
   };
 
   const onSave = () => {
     if (isNew) {
-      addNewTask(state);
+      addNewTask(selectedTask);
+    } else {
+      setTask(selectedTask);
     }
   };
 
   return (
-    state && (
+    selectedTask && (
       <div className={classNames('popover', { dark: settings.darkMode })}>
         <Row className="centered">
           <div className="task-form">
             <input
               className="title-input form-item"
-              value={state.title}
+              value={selectedTask.title}
               placeholder="Task title"
               onChange={(e) => setTitle(e.target.value)}
             />
 
-            <Col span={12}>
-              <TextArea
-                className="edit-textarea form-item"
-                rows={4}
-                value={state.text}
-                placeholder="Type task description in Markdown"
-                onChange={(e) => setText(e.target.value)}
-              />
-            </Col>
+            <Row gutter={[16, 0]}>
+              <Col span={12}>
+                <TextArea
+                  className="edit-textarea form-item"
+                  rows={4}
+                  value={selectedTask.text}
+                  placeholder="Type task description in Markdown"
+                  onChange={(e) => setText(e.target.value)}
+                />
+              </Col>
 
-            <Col span={11} style={{ marginLeft: 16 }}>
-              <ReactMarkdown className="markdown" source={state.text} linkTarget={'_blank'} />
-            </Col>
+              <Col span={12}>
+                <ReactMarkdown className="markdown" children={selectedTask.text} linkTarget={'_blank'} />
+              </Col>
+            </Row>
 
             <Link to="/">
               <Button type="primary" htmlType="submit" className="task-form-button" onClick={onSave}>
