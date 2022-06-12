@@ -4,6 +4,7 @@ import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Meta from 'antd/lib/card/Meta';
+import classNames from 'classnames';
 
 import { useTasks, useSettings } from '../entities';
 
@@ -23,7 +24,7 @@ const DraggableTaskCard = ({ data }) => {
   return (
     <div>
       <Link to={`/task/${state.id}`}>
-        <Card style={{ width: 300, textAlign: 'left' }} className={`${settings.darkMode ? 'dark' : ''}`}>
+        <Card className={classNames('task-card', { dark: settings.darkMode })}>
           <div>
             <Meta
               className={`${settings.darkMode ? 'dark' : ''}`}

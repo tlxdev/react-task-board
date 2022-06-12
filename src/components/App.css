@@ -96,3 +96,12 @@ strong {
 .task-column {
   padding-left: 32px;
 }
+
+.task-card {
+  width: 300px;
+  text-align: left;
+}
+
+.task-card .ant-card-body {
+  padding: 20px;
+}
