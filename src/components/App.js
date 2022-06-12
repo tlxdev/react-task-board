@@ -74,7 +74,7 @@ const App = ({ blur }) => {
                         {column.canAddTask && (
                           <Link to="/task/new">
                             <Button className="add-task-button" type="link" size={'default'} icon={<PlusOutlined />}>
-                              Add
+                              New task
                             </Button>
                           </Link>
                         )}
