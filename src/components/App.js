@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TaskList from './TaskList';
-import { Col, Row, Layout, Button } from 'antd';
+import { Col, Row, Layout, Button, Badge } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import { useTasks, useSettings } from '../entities';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -49,8 +49,7 @@ const App = ({ blur }) => {
           className={classNames('full-height', {
             dark: settings.darkMode,
             blurred: blur
-          })}
-        >
+          })}>
           <SideNavigation selectedPage="1" />
 
           <Content className="scrollbar-fix">
@@ -65,10 +64,10 @@ const App = ({ blur }) => {
                       lg={{ span: 12 }}
                       xl={{ span: 8 }}
                       xxl={{ span: 5 }}
-                      key={'task-column-' + column.name}
-                    >
+                      key={'task-column-' + column.name}>
                       <Row type="flex">
                         <Title className={`app-title ${settings.darkMode ? 'dark' : ''}`} level={4}>
+                          <Badge color={column.color} />
                           {column.name} ({column.tasks?.length || 0})
                         </Title>
                         {column.canAddTask && (

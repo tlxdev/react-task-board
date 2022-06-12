@@ -32,16 +32,20 @@ const initialColumns = [
   {
     name: 'Todo',
     tasks: [2, 3],
-    canAddTask: true
+    canAddTask: true,
+    // note these are antd colors
+    color: 'red',
   },
   {
     name: 'In progress',
-    tasks: [1]
+    tasks: [1],
+    color: 'orange',
   },
   {
     name: 'Done',
     tasks: [0],
-    showConfetti: true
+    showConfetti: true,
+    color: 'green'
   }
 ];
 
