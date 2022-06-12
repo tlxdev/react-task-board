@@ -20,8 +20,8 @@ const TaskList = ({ tasks, name }) => {
   // Handles diffing column data & showing confetti animation
   useEffect(() => {
     if (taskData?.columns?.length > 0) {
-      for (const column of taskData.columns) {
-        for (const columnTask of column.tasks) {
+      for (const column of taskData?.columns) {
+        for (const columnTask of column?.tasks || []) {
           // Show animation if the card has been moved to column that has 'showConfetti' attribute
           const taskData = taskPreviousColumns.tasks[columnTask];
           if (taskData && column.name && taskData.previousColumn !== column.name && column.showConfetti) {

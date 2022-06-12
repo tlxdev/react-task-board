@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { Layout, Button, Switch, Row, notification, Typography, Col } from 'antd';
+import { Layout, Button, Switch, Row, notification, Typography, Col, Divider, Timeline } from 'antd';
 import { exportData, getFileData, resetLocalStorageState } from '../utils/localstorage';
 import { useTasks, useSettings } from '../entities';
 
 import './App.css';
 import './Settings.css';
 import { SideNavigation } from './SideNavigation';
-import { DeleteOutlined, DownloadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, DownloadOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 
 const { Title } = Typography;
 
 // The settings view
 export const Settings = () => {
-  const [tasks, { loadTasksFromLocalStorage, importData }] = useTasks();
+  const [tasks, { loadTasksFromLocalStorage, importData, addNewColumnAtIndex, deleteColumnAtIndex }] = useTasks();
 
   const [settings, { loadSettingsFromLocalStorage, setDarkMode, setShowContentsOnTaskBoard }] = useSettings();
 
@@ -53,9 +53,12 @@ export const Settings = () => {
 
     notification.success({
       message: 'Data cleared to default',
-      placement: 'top',
+      placement: 'top'
     });
   };
+
+  const canCreateNewColumn = tasks?.columns?.length < 4;
+  const canDeleteColumn = tasks?.columns?.length > 1;
 
   return (
     <Layout className="full-height">
@@ -103,6 +106,24 @@ export const Settings = () => {
               </Button>
             </Col>
           </Row>
+
+          <Divider />
+
+          <Title level={5}>Task board columns (max 4)</Title>
+
+          <Timeline style={{ marginTop: 10 }}>
+            {tasks?.columns?.map((column, index) => (
+              <Timeline.Item color={column.color}>
+                {column.name}
+                <span style={{ paddingLeft: 5 }}>
+                  {canCreateNewColumn && (
+                    <Button type="link" size={'small'} icon={<PlusOutlined />} onClick={() => addNewColumnAtIndex(index + 1)} />
+                  )}
+                  {canDeleteColumn && <Button type="link" size={'small'} icon={<MinusOutlined />} onClick={() => deleteColumnAtIndex(index)} />}
+                </span>
+              </Timeline.Item>
+            ))}
+          </Timeline>
         </Layout>
       </Layout>
     </Layout>

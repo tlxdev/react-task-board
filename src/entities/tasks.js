@@ -20,6 +20,11 @@ export const setTask = (tasksStore) => (task) => {
 
 const insertToArrayWithoutMutate = (array, index, item) => [...array.slice(0, index), item, ...array.slice(index)];
 
+const NEW_EMPTY_COLUMN = {
+  name: 'New column',
+  tasks: []
+};
+
 export const moveTaskBetweenColumns = (tasksStore) => (sourceColumnName, targetColumnName, sourceTaskIndex, targetTaskIndex) => {
   // Find the task id for for given column and index
   const targetTaskId = tasksStore.state.columns.find((columnIter) => columnIter.name === sourceColumnName).tasks[sourceTaskIndex];
@@ -61,6 +66,36 @@ export const moveTaskInSameColumn = (tasksStore) => (columnName, sourceTaskIndex
   tasksStore.setState({ ...tasksStore.state, columns });
 };
 
+export const addNewColumnAtIndex = (tasksStore) => (index) => {
+  const oldColumnsBeforeIndex = tasksStore.state.columns.slice(0, index);
+  const oldColumnsAfterIndex = tasksStore.state.columns.slice(index, tasksStore.state.columns.length);
+
+  tasksStore.setState({
+    ...tasksStore.state,
+    columns: [...oldColumnsBeforeIndex, NEW_EMPTY_COLUMN, ...oldColumnsAfterIndex]
+  });
+};
+
+export const deleteColumnAtIndex = (tasksStore) => (index) => {
+  const nearestAvailableIndex = index === 0 ? 0 : index - 1;
+
+  const tasksOfDeletedColumn = tasksStore.state.columns?.[index]?.tasks || [];
+
+  const getTasksForColumn = (column, columnIndex) => {
+    if (columnIndex === nearestAvailableIndex) {
+      return [...column.tasks, ...tasksOfDeletedColumn];
+    }
+    return column.tasks;
+  };
+
+  tasksStore.setState({
+    ...tasksStore.state,
+    columns: tasksStore.state.columns
+      .filter((element, elementIndex) => index !== elementIndex)
+      .map((column, columnIndex) => ({ ...column, tasks: getTasksForColumn(column, columnIndex) }))
+  });
+};
+
 export const addNewTask = (tasksStore) => (task) => {
   const oldTaskCount = tasksStore.state.tasks.length;
   // Create new task object, id made by auto incrementing
@@ -77,8 +112,6 @@ export const addNewTask = (tasksStore) => (task) => {
     }
     return column;
   });
-
-  console.log(tasksWithNewTask);
 
   tasksStore.setState({
     ...tasksStore.state,
