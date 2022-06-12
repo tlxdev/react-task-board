@@ -84,3 +84,7 @@ textarea.edit-textarea {
 .dark input {
     padding-left: 8px;
 }
+
+.markdown img {
+    max-width: 100%;
+}

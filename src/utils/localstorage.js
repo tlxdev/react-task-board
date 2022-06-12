@@ -16,7 +16,7 @@ const initialTasks = [
     title: 'Edit a task',
     text: `Edit a task and type some markdown. 
 Some examples about possibilities are images
-![Images](https://icon-library.net/images/react-icon/react-icon-13.jpg)
+![Images](https://image.shutterstock.com/image-photo/example-word-written-on-wooden-260nw-1765482248.jpg)
 
 or links
 https://www.github.com/tlxdev`
