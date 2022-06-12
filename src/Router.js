@@ -5,6 +5,7 @@ import { TaskView } from './components/TaskView';
 import { useTasks, useSettings } from './entities';
 import { Settings } from './components/Settings';
 import { About } from './components/About';
+import { ColumnEditor } from './components/ColumnEditor';
 
 const Router = () => {
   const [tasks, { loadTasksFromLocalStorage, saveTasksToLocalStorage }] = useTasks();
@@ -34,6 +35,10 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<App />} />
+        <Route path="/column" element={<Settings blur />}>
+          <Route path=":index" element={<ColumnEditor />} />
+        </Route>
+        
         <Route path="/task" element={<App blur />}>
           <Route path=":id" element={<TaskView />} />
         </Route>

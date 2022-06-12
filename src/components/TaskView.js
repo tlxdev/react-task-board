@@ -11,7 +11,7 @@ import classNames from 'classnames';
 
 const EMPTY_TASK = {
   title: '',
-  text: ''
+  text: '',
 };
 
 /**

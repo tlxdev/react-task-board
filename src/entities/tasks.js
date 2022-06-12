@@ -120,6 +120,20 @@ export const addNewTask = (tasksStore) => (task) => {
   });
 };
 
+export const editColumn = (tasksStore) => (index, newColumnValues) => {
+  const columns = tasksStore.state.columns.map((column, columnIndex) => {
+    if (Number(columnIndex) === Number(index)) {
+      return {
+        ...column,
+        ...newColumnValues
+      };
+    }
+    return column;
+  });
+
+  tasksStore.setState({ ...tasksStore.state, columns });
+};
+
 export const loadTasksFromLocalStorage = (tasksStore) => () => {
   // Set state to data from localstorage
   tasksStore.setState({ ...loadState('state') });

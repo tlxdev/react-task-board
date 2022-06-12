@@ -23,7 +23,7 @@
 }
 
 .blurred {
-  -webkit-filter: blur(16px);
+  -webkit-filter: blur(2px) brightness(20%);
 }
 
 .full-height {
