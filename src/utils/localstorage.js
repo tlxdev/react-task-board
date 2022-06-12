@@ -3,8 +3,8 @@
 const initialTasks = [
   {
     id: 0,
-    title: 'Test editing by clicking a task',
-    text: "You can write markdown, and instantly preview it while typing. Isn't that nice?"
+    title: 'Visit the application',
+    text: `Use react-task-board by navigating to it with your browser`
   },
   {
     id: 1,
@@ -13,6 +13,11 @@ const initialTasks = [
   },
   {
     id: 2,
+    title: 'Test editing by clicking a task',
+    text: "You can write markdown, and instantly preview it while typing. Isn't that nice?"
+  },
+  {
+    id: 3,
     title: 'Edit a task',
     text: `Edit a task and type some markdown. 
 Some examples about possibilities are images
@@ -20,27 +25,22 @@ Some examples about possibilities are images
 
 or links
 https://www.github.com/tlxdev`
-  },
-  {
-    id: 3,
-    title: 'Visit the application',
-    text: `Use react-task-board by navigating to it`
   }
 ];
 
 const initialColumns = [
   {
     name: 'Todo',
-    tasks: [0, 1],
+    tasks: [2, 3],
     canAddTask: true
   },
   {
     name: 'In progress',
-    tasks: [2]
+    tasks: [1]
   },
   {
     name: 'Done',
-    tasks: [3],
+    tasks: [0],
     showConfetti: true
   }
 ];
