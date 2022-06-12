@@ -1,11 +1,7 @@
 .settings-switch {
     width: 24px;
-    margin-right: 4px;
-    margin-bottom: 8px;
-}
-
-.settings-switch-text {
-    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 16px;
 }
 
 .settings-button {
