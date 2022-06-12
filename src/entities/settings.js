@@ -11,6 +11,10 @@ export const setDarkMode = (settingsStore) => (darkMode) => {
   settingsStore.setState({ ...settingsStore.state, darkMode });
 };
 
+export const setShowContentsOnTaskBoard = (settingsStore) => (showContentsOnTaskBoard) => {
+  settingsStore.setState({ ...settingsStore.state, showContentsOnTaskBoard });
+};
+
 export const loadSettingsFromLocalStorage = (settingsStore) => () => {
   // Set state to data from localstorage
   settingsStore.setState({ ...loadState('settings'), loaded: true });

@@ -27,7 +27,7 @@ const DraggableTaskCard = React.memo(({ id }) => {
         <Meta
           className={classNames({ dark: settings.darkMode })}
           title={`#${task.id} ${task.title}`}
-          description={<ReactMarkdown source={task.text} />}
+          description={settings.showContentsOnTaskBoard && <ReactMarkdown className="markdown" children={task.text} />}
         />
       </Card>
     </Link>

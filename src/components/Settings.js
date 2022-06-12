@@ -18,7 +18,7 @@ const { Title } = Typography;
 export const Settings = () => {
   const [tasks, { importData }] = useTasks();
 
-  const [settings, { setDarkMode }] = useSettings();
+  const [settings, { setDarkMode, setShowContentsOnTaskBoard }] = useSettings();
 
   const onClickExport = () => {
     exportData(tasks);
@@ -40,6 +40,10 @@ export const Settings = () => {
 
   const onChangeDarkMode = (newVal) => {
     setDarkMode(newVal);
+  };
+
+  const onChangeShowTaskContentsOnBoard = (newVal) => {
+    setShowContentsOnTaskBoard(newVal);
   };
 
   return (
@@ -67,7 +71,7 @@ export const Settings = () => {
           </Row>
 
           <Row>
-            <Switch defaultChecked className="settings-switch">
+            <Switch className="settings-switch" onChange={onChangeShowTaskContentsOnBoard} checked={settings.showContentsOnTaskBoard}>
               Show contents
             </Switch>
             <span className="settings-switch-text">Show task contents on task board</span>
