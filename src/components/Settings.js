@@ -60,6 +60,28 @@ export const Settings = () => {
   const canCreateNewColumn = tasks?.columns?.length < 4;
   const canDeleteColumn = tasks?.columns?.length > 1;
 
+  const TaskboardColumnEditor = () => (
+    <Timeline style={{ marginTop: 10 }}>
+      {tasks?.columns?.map((column, index) => (
+        <Timeline.Item color={column.color}>
+          {column.name}
+
+          {canCreateNewColumn && (
+            <Button
+              style={{ paddingLeft: 5 }}
+              type="link"
+              size={'small'}
+              icon={<PlusOutlined />}
+              onClick={() => addNewColumnAtIndex(index + 1)}
+            />
+          )}
+
+          {canDeleteColumn && <Button type="link" size={'small'} icon={<MinusOutlined />} onClick={() => deleteColumnAtIndex(index)} />}
+        </Timeline.Item>
+      ))}
+    </Timeline>
+  );
+
   return (
     <Layout className="full-height">
       <SideNavigation selectedPage={'2'} />
@@ -111,19 +133,7 @@ export const Settings = () => {
 
           <Title level={5}>Task board columns (max 4)</Title>
 
-          <Timeline style={{ marginTop: 10 }}>
-            {tasks?.columns?.map((column, index) => (
-              <Timeline.Item color={column.color}>
-                {column.name}
-                <span style={{ paddingLeft: 5 }}>
-                  {canCreateNewColumn && (
-                    <Button type="link" size={'small'} icon={<PlusOutlined />} onClick={() => addNewColumnAtIndex(index + 1)} />
-                  )}
-                  {canDeleteColumn && <Button type="link" size={'small'} icon={<MinusOutlined />} onClick={() => deleteColumnAtIndex(index)} />}
-                </span>
-              </Timeline.Item>
-            ))}
-          </Timeline>
+          <TaskboardColumnEditor />
         </Layout>
       </Layout>
     </Layout>
