@@ -1,24 +1,22 @@
 import React from 'react';
 
-import { Layout, Button, Switch, Row, notification } from 'antd';
-import { exportData, getFileData } from '../utils/localstorage';
+import { Layout, Button, Switch, Row, notification, Typography, Col } from 'antd';
+import { exportData, getFileData, resetLocalStorageState } from '../utils/localstorage';
 import { useTasks, useSettings } from '../entities';
-
-import { Typography } from 'antd';
 
 import './App.css';
 import './Settings.css';
 import { SideNavigation } from './SideNavigation';
-import { DownloadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, DownloadOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 
 const { Title } = Typography;
 
 // The settings view
 export const Settings = () => {
-  const [tasks, { importData }] = useTasks();
+  const [tasks, { loadTasksFromLocalStorage, importData }] = useTasks();
 
-  const [settings, { setDarkMode, setShowContentsOnTaskBoard }] = useSettings();
+  const [settings, { loadSettingsFromLocalStorage, setDarkMode, setShowContentsOnTaskBoard }] = useSettings();
 
   const onClickExport = () => {
     exportData(tasks);
@@ -44,6 +42,19 @@ export const Settings = () => {
 
   const onChangeShowTaskContentsOnBoard = (newVal) => {
     setShowContentsOnTaskBoard(newVal);
+  };
+
+  const onResetData = () => {
+    resetLocalStorageState();
+
+    // loadSettings functions auto-init with default data if localstorage is empty
+    loadSettingsFromLocalStorage();
+    loadTasksFromLocalStorage();
+
+    notification.success({
+      message: 'Data cleared to default',
+      placement: 'top',
+    });
   };
 
   return (
@@ -77,13 +88,20 @@ export const Settings = () => {
             <span className="settings-switch-text">Show task contents on task board</span>
           </Row>
 
-          <Row>
-            <Button type="normal" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={onClickImport}>
-              Import data
-            </Button>
-            <Button type="primary" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={onClickExport}>
-              Export data
-            </Button>
+          <Row gutter={[0, 16]} type="flex">
+            <Col>
+              <Button type="normal" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={onClickImport}>
+                Import task data
+              </Button>
+              <Button type="primary" icon={<DownloadOutlined />} size="default" className="settings-button" onClick={onClickExport}>
+                Export task data
+              </Button>
+            </Col>
+            <Col span={24}>
+              <Button type="danger" icon={<DeleteOutlined />} onClick={onResetData}>
+                Reset tasks
+              </Button>
+            </Col>
           </Row>
         </Layout>
       </Layout>

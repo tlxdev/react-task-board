@@ -112,3 +112,8 @@ export const getFileData = () => {
     );
   });
 };
+
+export const resetLocalStorageState = () => {
+  localStorage.clear('settings');
+  localStorage.clear('state');
+}
