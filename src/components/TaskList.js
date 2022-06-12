@@ -42,7 +42,7 @@ const TaskList = ({ tasks, name }) => {
         <div className="task-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
           <Confetti className="confetti" active={showAnim?.includes(task)}></Confetti>
 
-          <DraggableTaskCard data={task}></DraggableTaskCard>
+          <DraggableTaskCard id={task}></DraggableTaskCard>
         </div>
       )}
     </Draggable>

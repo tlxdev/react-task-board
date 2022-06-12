@@ -10,32 +10,28 @@ import { useTasks, useSettings } from '../entities';
 
 import './App.css';
 
-const DraggableTaskCard = ({ data }) => {
+const DraggableTaskCard = React.memo(({ id }) => {
   const [tasks] = useTasks();
 
-  const [state, setState] = useState({});
+  const task = tasks.tasks.find((taskIter) => taskIter.id === id);
 
   const [settings] = useSettings();
 
-  useEffect(() => {
-    setState({ ...tasks.tasks.find((taskIter) => taskIter.id === data) });
-  }, [tasks, data]);
+  if (id == null) {
+    return null;
+  }
 
   return (
-    <div>
-      <Link to={`/task/${state.id}`}>
-        <Card className={classNames('task-card', { dark: settings.darkMode })}>
-          <div>
-            <Meta
-              className={`${settings.darkMode ? 'dark' : ''}`}
-              title={`#${state.id} ${state.title}`}
-              description={<ReactMarkdown source={state.text} />}
-            />
-          </div>
-        </Card>
-      </Link>
-    </div>
+    <Link to={`/task/${task.id}`}>
+      <Card className={classNames('task-card', { dark: settings.darkMode })}>
+        <Meta
+          className={`${settings.darkMode ? 'dark' : ''}`}
+          title={`#${task.id} ${task.title}`}
+          description={<ReactMarkdown source={task.text} />}
+        />
+      </Card>
+    </Link>
   );
-};
+});
 
 export default DraggableTaskCard;
