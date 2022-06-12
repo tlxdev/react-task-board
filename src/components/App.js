@@ -47,7 +47,7 @@ const App = ({ blur }) => {
       <div className="full-height" onClick={onClickMainDiv}>
         <Layout
           className={classNames('full-height', {
-            dark: settings.darkmode,
+            dark: settings.darkMode,
             blurred: blur
           })}
         >
