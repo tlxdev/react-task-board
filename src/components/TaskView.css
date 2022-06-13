@@ -85,6 +85,10 @@ textarea.edit-textarea {
     padding-left: 8px;
 }
 
+.dark .markdown{
+    color: #FFF;
+}
+
 .markdown img {
     max-width: 100%;
     object-fit: contain;
