@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Redirect, Navigate } from 'react-router-dom';
 import App from './components/App';
 import { TaskView } from './components/TaskView';
 import { useTasks, useSettings } from './entities';
@@ -33,12 +33,14 @@ const Router = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
+      <Routes basename={process.env.PUBLIC_URL}>
         <Route index element={<App />} />
+
+        <Route path="/react-task-board" element={<Navigate to="/" replace />} />
         <Route path="/column" element={<Settings blur />}>
           <Route path=":index" element={<ColumnEditor />} />
         </Route>
-        
+
         <Route path="/task" element={<App blur />}>
           <Route path=":id" element={<TaskView />} />
         </Route>
