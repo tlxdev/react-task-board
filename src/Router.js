@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Redirect, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import App from './components/App';
 import { TaskView } from './components/TaskView';
 import { useTasks, useSettings } from './entities';
